@@ -1,2 +1,0 @@
-android.app.Application
-ch.hsr.casmobile.Device2Device_FileIO

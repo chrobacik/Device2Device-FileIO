@@ -1,8 +1,0 @@
-/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Test/bin/Debug/Device2Device-FileIO.Test.dll
-/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Test/bin/Debug/Device2Device-FileIO.Test.pdb
-/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Test/bin/Debug/nunit.framework.dll
-/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Test/bin/Debug/nunit.framework.xml
-/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Test/obj/Debug/Device2Device-FileIO.Test.csprojResolveAssemblyReference.cache
-/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Test/obj/Debug/Device2Device-FileIO.Test.csproj.CoreCompileInputs.cache
-/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Test/obj/Debug/Device2Device-FileIO.Test.dll
-/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Test/obj/Debug/Device2Device-FileIO.Test.pdb
