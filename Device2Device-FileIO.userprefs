@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{5D64DAEA-7B7D-4039-989D-5E084A8990E4}|Default">
+  <MonoDevelop.Ide.ItemProperties.Device2Device-FileIO.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.D214EA5E-5321-4A7B-8C75-804DA80FE4AA" />
+  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Device2Device-FileIO.Android PreferredExecutionTarget="Android.Nexus_6_API_24" />
+  <DisabledProjects>
+    <String>iOS/Device2Device-FileIO.iOS.csproj</String>
+  </DisabledProjects>
+</Properties>

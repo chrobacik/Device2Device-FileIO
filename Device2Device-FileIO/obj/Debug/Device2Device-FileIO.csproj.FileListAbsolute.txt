@@ -1,0 +1,7 @@
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO/bin/Debug/Device2Device-FileIO.dll
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO/bin/Debug/Device2Device-FileIO.pdb
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO/obj/Debug/Device2Device-FileIO.csproj.CoreCompileInputs.cache
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO/obj/Debug/Device2DeviceFileIO.App.xaml.g.cs
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO/obj/Debug/Device2DeviceFileIO.Device2Device-FileIOPage.xaml.g.cs
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO/obj/Debug/Device2Device-FileIO.dll
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO/obj/Debug/Device2Device-FileIO.pdb

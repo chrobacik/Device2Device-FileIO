@@ -1,0 +1,8 @@
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Core/bin/Debug/netstandard2.0/Device2Device-FileIO.Core.deps.json
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Core/bin/Debug/netstandard2.0/Device2Device-FileIO.Core.dll
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Core/bin/Debug/netstandard2.0/Device2Device-FileIO.Core.pdb
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Core/obj/Debug/netstandard2.0/Device2Device-FileIO.Core.csproj.CoreCompileInputs.cache
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Core/obj/Debug/netstandard2.0/Device2Device-FileIO.Core.AssemblyInfoInputs.cache
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Core/obj/Debug/netstandard2.0/Device2Device-FileIO.Core.AssemblyInfo.cs
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Core/obj/Debug/netstandard2.0/Device2Device-FileIO.Core.dll
+/Volumes/SD_Card/HSR/Device2Device-FileIO/Device2Device-FileIO.Core/obj/Debug/netstandard2.0/Device2Device-FileIO.Core.pdb
