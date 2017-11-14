@@ -8,7 +8,7 @@ namespace Device2DeviceFileIO
         {
             InitializeComponent();
 
-            MainPage = new Device2Device_FileIOPage();
+            MainPage = new NavigationPage(new Device2Device_FileIOPage());
         }
 
         protected override void OnStart()
