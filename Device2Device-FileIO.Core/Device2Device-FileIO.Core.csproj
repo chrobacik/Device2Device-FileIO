@@ -2,6 +2,33 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Device2DeviceFileIO</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Pages\SendFilePage.xaml" />
+    <None Remove="App.xaml" />
+    <None Remove="Device2Device-FileIOPage.xaml" />
+    <None Remove="Pages\Device2Device-FileIOPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Pages\SendFilePage.xaml.cs">
+      <DependentUpon>..\..\Device2Device-FileIO\Pages\SendFilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Device2Device-FileIOPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ZXing.Net.Mobile" Version="2.3.2" />
+    <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.3.2" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.91635" />
+  </ItemGroup>
 </Project>

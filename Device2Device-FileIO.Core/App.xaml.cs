@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Device2DeviceFileIO.Pages;
+using Xamarin.Forms;
 
 namespace Device2DeviceFileIO
 {
@@ -8,7 +9,7 @@ namespace Device2DeviceFileIO
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Device2Device_FileIOPage());
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

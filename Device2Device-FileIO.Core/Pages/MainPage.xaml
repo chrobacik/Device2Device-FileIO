@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Device2DeviceFileIO" x:Class="Device2DeviceFileIO.Device2Device_FileIOPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Device2DeviceFileIO" x:Class="Device2DeviceFileIO.MainPage">
 	<ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="Welcome to Device2Device File.IO" VerticalOptions="Center" />

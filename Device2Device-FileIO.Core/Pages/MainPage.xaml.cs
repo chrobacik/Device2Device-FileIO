@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace Device2DeviceFileIO
 {
-    public partial class Device2Device_FileIOPage : ContentPage
+    public partial class MainPage : ContentPage
     {
-        public Device2Device_FileIOPage()
+        public MainPage()
         {
             InitializeComponent();
             Title = "Device2Device File.IO";

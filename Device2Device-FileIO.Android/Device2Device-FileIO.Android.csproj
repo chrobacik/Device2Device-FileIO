@@ -129,9 +129,9 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Device2Device-FileIO\Device2Device-FileIO.csproj">
-      <Project>{F3AFAE0F-EB8F-4630-A90E-65D2637BB9CB}</Project>
-      <Name>Device2Device-FileIO</Name>
+    <ProjectReference Include="..\Device2Device-FileIO.Core\Device2Device-FileIO.Core.csproj">
+      <Project>{9BA9B008-9926-4FB1-9A38-62BD9E1D0ED6}</Project>
+      <Name>Device2Device-FileIO.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -35,12 +35,11 @@ namespace Device2DeviceFileIO.Android
         {
             base.OnActivityResult(requestCode, resultCode, intent);
 
-
-            if (requestCode == PickImageId)
+            if (requestCode == PickImageId && intent != null)
             {
                 Console.WriteLine("Intent result: {0}", intent.Data.ToString());
 
-                if ((resultCode == Result.Ok) && (intent != null))
+                if (resultCode == Result.Ok)
                 {
                     PickImageTaskCompletionSource.SetResult(GetPathToImage(intent.Data));
                 }
