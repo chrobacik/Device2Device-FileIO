@@ -4,6 +4,8 @@
         <StackLayout Padding="10">
             <Label Text="Welcome to Device2Device File.IO" VerticalOptions="Center" />
             <Button x:Name="btnGoToSelectFile" Text="Go To Select File Page"></Button>
+            <Button x:Name="btnGoToBarcodeScan" Text="Got To Barcode Scanning"></Button>
+            <Button x:Name="btnGoToBarcodeShow" Text="Got To Barcode Show"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

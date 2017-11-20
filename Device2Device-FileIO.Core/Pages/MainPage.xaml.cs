@@ -14,6 +14,17 @@ namespace Device2DeviceFileIO
 
                 await Navigation.PushAsync(new SendFilePage());
             };
+
+            btnGoToBarcodeScan.Clicked += async (object sender, System.EventArgs e) => {
+
+                await Navigation.PushAsync(new BarcodeScanPage());
+            };
+
+            btnGoToBarcodeShow.Clicked += async (object sender, System.EventArgs e) => {
+
+                await Navigation.PushAsync(new BarcodePage());
+            };
+
         }
     }
 }
