@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -6,8 +6,6 @@
 	<string>Device2Device-FileIO</string>
 	<key>CFBundleName</key>
 	<string>Device2Device-FileIO</string>
-	<key>CFBundleIdentifier</key>
-	<string>ch.hsr.casmobile.Device2Device-FileIO</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -15,7 +13,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string>10.3</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -42,5 +40,11 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Die Kamera wird benutzt, um den QR Code zu scannen.</string>
+	<key>CFBundleIdentifier</key>
+	<string>ch.hsr.casmobile.Device2Device-FileIO</string>
+	<key>Custom Property</key>
+	<string></string>
 </dict>
 </plist>

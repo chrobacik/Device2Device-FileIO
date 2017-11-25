@@ -58,5 +58,19 @@ namespace Device2DeviceFileIO
             // The root page of your application
             Content = grid;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            mZxing.IsScanning = true;
+        }
+
+        protected override void OnDisappearing()
+        {
+            mZxing.IsScanning = false;
+
+            base.OnDisappearing();
+        }
     }
 }
