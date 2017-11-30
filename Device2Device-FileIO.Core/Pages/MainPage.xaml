@@ -6,6 +6,10 @@
             <Button x:Name="btnGoToSelectFile" Text="Go To Select File Page"></Button>
             <Button x:Name="btnGoToBarcodeScan" Text="Got To Barcode Scanning"></Button>
             <Button x:Name="btnGoToBarcodeShow" Text="Got To Barcode Show"></Button>
+
+            <ProgressBar x:Name="prgUploadFile" Progress="0"></ProgressBar>
+            <Button x:Name="btnUploadFile" Text="Upload File"></Button>
+            <Button x:Name="btnDownloadFile" Text="Download File"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

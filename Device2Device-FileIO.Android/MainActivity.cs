@@ -10,6 +10,9 @@ using Android.OS;
 using System.Threading.Tasks;
 using Android.Provider;
 using Droid = Android.Net;
+using Xamarin.Forms;
+using Device2DeviceFileIO.Classes;
+using Device2DeviceFileIO.Android.Services;
 
 namespace Device2DeviceFileIO.Android
 {
@@ -31,6 +34,12 @@ namespace Device2DeviceFileIO.Android
             global::ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
             LoadApplication(new App());
+
+            MessagingCenter.Subscribe<UploadFileMessage>(this, "UploadFileMessage", message => {
+                
+                var intent = new Intent(this, typeof(FileService));
+                StartService(intent);
+            });
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
