@@ -25,8 +25,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Classes\" />
+    <Folder Include="UI\" />
+    <Folder Include="UI\ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ZXing.Net.Mobile" Version="2.3.2" />
