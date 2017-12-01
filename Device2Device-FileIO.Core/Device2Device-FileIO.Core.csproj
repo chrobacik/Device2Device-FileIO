@@ -25,7 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Classes\" />
   </ItemGroup>
   <ItemGroup>
