@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Device2DeviceFileIO.Classes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,7 +10,7 @@ namespace Device2DeviceFileIO.Interfaces
     /// </summary>
     public interface ICloudFileService
     {
-        void Upload();
-        void Download();
+        void Upload(TransferFile file, QRCode qRCode);
+        void Download(TransferFile file, QRCode qRCode);
     }
 }

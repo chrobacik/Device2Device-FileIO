@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Device2DeviceFileIO.Classes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace Device2DeviceFileIO.Interfaces
     /// </summary>
     public interface IFileCryptor
     {
-        void Encrypt();
-        void Decrypt();
+        void Encrypt(TransferFile file, QRCode qRCode);
+        void Decrypt(TransferFile file, QRCode qRCode);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Device2DeviceFileIO.Classes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,7 +10,7 @@ namespace Device2DeviceFileIO.Interfaces
     /// </summary>
     interface  IShareHandler
     {
-        void ReceiveFile();
-        void ProvideFile();
+        TransferFile ReceiveFile();
+        void ProvideFile(TransferFile transferFile);
     }
 }
