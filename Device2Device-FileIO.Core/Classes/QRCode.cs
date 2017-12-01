@@ -6,8 +6,8 @@ namespace Device2DeviceFileIO.Classes
         
         public String Url { get; set; }
         public String FileName { get; set; }
-        public int ExpirationDate { get; set; }
-        public String Key { get; set; }
+        public DateTime ExpirationDate { get; set; }
+        public byte[] Key { get; set; }
 
         public QRCode()
         {

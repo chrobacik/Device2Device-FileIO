@@ -12,7 +12,7 @@ namespace Device2DeviceFileIO.Classes
             Aborted,
         };
 
-        public int percentage { get; set; }
+        public double percentage { get; set; }
 
         public TransferStatus()
         {

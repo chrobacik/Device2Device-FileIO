@@ -5,7 +5,7 @@ namespace Device2DeviceFileIO.Classes
     {
 
         public String Name { get; set; }
-        public Int64 Size { get; set; }
+        public long Size { get; set; }
         public String Type { get; set; }
         public byte[] Content { get; set; }
 
