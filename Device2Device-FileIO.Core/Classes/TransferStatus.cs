@@ -10,6 +10,8 @@ namespace Device2DeviceFileIO.Classes
             Transfering,
             Completed,
             Aborted,
+            ReceivedFromOS,
+
         };
 
         public double percentage { get; set; }

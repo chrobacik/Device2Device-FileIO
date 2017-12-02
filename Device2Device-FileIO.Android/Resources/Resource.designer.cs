@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Device2DeviceFileIO.Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("Device2DeviceFileIO.Droid.Resource", IsApplication=true)]
 
-namespace Device2DeviceFileIO.Android
+namespace Device2DeviceFileIO.Droid
 {
 	
 	
@@ -26,13 +26,13 @@ namespace Device2DeviceFileIO.Android
 		
 		public static void UpdateIdValues()
 		{
-			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Device2DeviceFileIO.Android.Resource.Attribute.actionBarSize;
-			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscanneractivitylayout = global::Device2DeviceFileIO.Android.Resource.Layout.zxingscanneractivitylayout;
-			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscannerfragmentlayout = global::Device2DeviceFileIO.Android.Resource.Layout.zxingscannerfragmentlayout;
-			global::ZXing.Net.Mobile.Forms.Android.Resource.String.library_name = global::Device2DeviceFileIO.Android.Resource.String.library_name;
-			global::ZXing.Mobile.Resource.Id.contentFrame = global::Device2DeviceFileIO.Android.Resource.Id.contentFrame;
-			global::ZXing.Mobile.Resource.Layout.zxingscanneractivitylayout = global::Device2DeviceFileIO.Android.Resource.Layout.zxingscanneractivitylayout;
-			global::ZXing.Mobile.Resource.Layout.zxingscannerfragmentlayout = global::Device2DeviceFileIO.Android.Resource.Layout.zxingscannerfragmentlayout;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Device2DeviceFileIO.Droid.Resource.Attribute.actionBarSize;
+			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscanneractivitylayout = global::Device2DeviceFileIO.Droid.Resource.Layout.zxingscanneractivitylayout;
+			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscannerfragmentlayout = global::Device2DeviceFileIO.Droid.Resource.Layout.zxingscannerfragmentlayout;
+			global::ZXing.Net.Mobile.Forms.Android.Resource.String.library_name = global::Device2DeviceFileIO.Droid.Resource.String.library_name;
+			global::ZXing.Mobile.Resource.Id.contentFrame = global::Device2DeviceFileIO.Droid.Resource.Id.contentFrame;
+			global::ZXing.Mobile.Resource.Layout.zxingscanneractivitylayout = global::Device2DeviceFileIO.Droid.Resource.Layout.zxingscanneractivitylayout;
+			global::ZXing.Mobile.Resource.Layout.zxingscannerfragmentlayout = global::Device2DeviceFileIO.Droid.Resource.Layout.zxingscannerfragmentlayout;
 		}
 		
 		public partial class Animation

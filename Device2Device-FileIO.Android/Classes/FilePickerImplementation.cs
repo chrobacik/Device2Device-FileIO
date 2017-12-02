@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Android.Content;
-using Device2DeviceFileIO.Android.Classes;
+using Device2DeviceFileIO.Droid.Classes;
 using Device2DeviceFileIO.Interfaces;
 using Xamarin.Forms;
 
 [assembly: Xamarin.Forms.Dependency(typeof(FilePickerImplementation))]
-namespace Device2DeviceFileIO.Android.Classes
+namespace Device2DeviceFileIO.Droid.Classes
 {
     public class FilePickerImplementation : IFilePicker
     {

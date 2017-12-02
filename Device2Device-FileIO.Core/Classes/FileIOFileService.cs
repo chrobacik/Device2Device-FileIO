@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace Device2DeviceFileIO.Classes
 {
-    public class FileIOFileService : IFileService
+    public class FileIOFileService 
     {
         public async Task<String> UploadFileAsync(Stream stream)
         {

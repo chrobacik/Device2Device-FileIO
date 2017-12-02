@@ -8,9 +8,11 @@ namespace Device2DeviceFileIO.Interfaces
     /// <summary>
     /// Platform specific exchange of files
     /// </summary>
-    interface  IShareHandler
+    public interface IShareHandler
     {
+        event EventHandler ShareFileRequestReceived;
         TransferFile ReceiveFile();
         void ProvideFile(TransferFile transferFile);
     }
+
 }

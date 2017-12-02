@@ -5,12 +5,12 @@ using Android.Content;
 using Android.OS;
 using Device2DeviceFileIO.Classes;
 using Xamarin.Forms;
-using Droid = global::Android;
 
-namespace Device2DeviceFileIO.Android.Services
+
+namespace Device2DeviceFileIO.Droid.Services
 {
-    [Droid.App.Service]
-    public class FileService : Droid.App.Service
+    [Android.App.ServiceAttribute]
+    public class FileService : Android.App.Service
     {
         CancellationTokenSource _cts;
 
@@ -19,7 +19,7 @@ namespace Device2DeviceFileIO.Android.Services
             return null;
         }
 
-        public override Droid.App.StartCommandResult OnStartCommand(Intent intent, Droid.App.StartCommandFlags flags, int startId)
+        public override Android.App.StartCommandResult OnStartCommand(Intent intent, Android.App.StartCommandFlags flags, int startId)
         {
             _cts = new CancellationTokenSource();
 
@@ -29,7 +29,7 @@ namespace Device2DeviceFileIO.Android.Services
                     var service = new Device2DeviceFileIO.Classes.FileIOFileService();
                     service.UploadFile(_cts.Token).Wait();
                 }
-                catch (Droid.OS.OperationCanceledException)
+                catch (Android.OS.OperationCanceledException)
                 {
                 }
                 finally
@@ -44,7 +44,7 @@ namespace Device2DeviceFileIO.Android.Services
 
             }, _cts.Token);
 
-            return Droid.App.StartCommandResult.Sticky;
+            return Android.App.StartCommandResult.Sticky;
         }
 
         public override void OnDestroy()

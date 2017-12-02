@@ -9,13 +9,20 @@ using Android.Widget;
 using Android.OS;
 using System.Threading.Tasks;
 using Android.Provider;
-using Droid = Android.Net;
+using Android.Net;
 using Xamarin.Forms;
 using Device2DeviceFileIO.Classes;
-using Device2DeviceFileIO.Android.Services;
+using Device2DeviceFileIO.Droid.Services;
+using Android;
 
-namespace Device2DeviceFileIO.Android
+namespace Device2DeviceFileIO.Droid
 {
+
+
+    [IntentFilter(
+        new[] { Intent.ActionSend }, 
+        Categories = new[] { Intent.CategoryDefault }, 
+        DataMimeType = @"*/*")]
     [Activity(Label = "Device2Device-FileIO.Android", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -24,8 +31,8 @@ namespace Device2DeviceFileIO.Android
 
         protected override void OnCreate(Bundle bundle)
         {
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
+            TabLayoutResource = Droid.Resource.Layout.Tabbar;
+            ToolbarResource = Droid.Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
 
@@ -71,7 +78,7 @@ namespace Device2DeviceFileIO.Android
         /// </summary>
         /// <returns>The path to image</returns>
         /// <param name="uri">URI of selected image</param>
-        protected String GetPathToImage(Droid.Uri uri)
+        protected String GetPathToImage(Android.Net.Uri uri)
         {
             string doc_id = "";
             using (var c1 = ContentResolver.Query(uri, null, null, null, null))
