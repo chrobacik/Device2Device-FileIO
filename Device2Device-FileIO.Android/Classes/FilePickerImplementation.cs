@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Android.Content;
+﻿using Android.Content;
 using Device2DeviceFileIO.Droid.Classes;
 using Device2DeviceFileIO.Interfaces;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 [assembly: Xamarin.Forms.Dependency(typeof(FilePickerImplementation))]
