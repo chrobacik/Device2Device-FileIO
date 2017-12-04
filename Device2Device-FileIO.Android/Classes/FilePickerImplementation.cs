@@ -1,4 +1,5 @@
-﻿using Android.Content;
+﻿using Android.App;
+using Android.Content;
 using Device2DeviceFileIO.Droid.Classes;
 using Device2DeviceFileIO.Interfaces;
 using System;
@@ -10,8 +11,11 @@ namespace Device2DeviceFileIO.Droid.Classes
 {
     public class FilePickerImplementation : IFilePicker
     {
-        public FilePickerImplementation()
+        MainActivity ParentActivity { get; set; }
+
+        public FilePickerImplementation(MainActivity activity )
         {
+            ParentActivity = activity;
         }
 
         public Task<string> GetFilePathAsync()
@@ -21,16 +25,16 @@ namespace Device2DeviceFileIO.Droid.Classes
             intent.SetType("*/*");
 
             // Get the MainActivity instance
-            MainActivity activity = Forms.Context as MainActivity;
+            //MainActivity activity = Forms.Context as MainActivity; <- Obsolete
 
             // Start the picture-picker activity (resumes in MainActivity.cs)
-            activity.StartActivityForResult(Intent.CreateChooser(intent, "Select File"), MainActivity.PickImageId);
+            ParentActivity.StartActivityForResult(Intent.CreateChooser(intent, "Select File"), MainActivity.PickImageId);
 
             // Save the TaskCompletionSource object as a MainActivity property
-            activity.PickImageTaskCompletionSource = new TaskCompletionSource<String>();
+            ParentActivity.PickImageTaskCompletionSource = new TaskCompletionSource<String>();
 
             // Return Task object
-            return activity.PickImageTaskCompletionSource.Task;
+            return ParentActivity.PickImageTaskCompletionSource.Task;
         }
     }
 }

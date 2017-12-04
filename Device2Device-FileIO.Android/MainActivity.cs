@@ -14,6 +14,7 @@ using Xamarin.Forms;
 using Device2DeviceFileIO.Classes;
 using Device2DeviceFileIO.Droid.Services;
 using Android;
+using Device2DeviceFileIO.Droid.Classes;
 
 namespace Device2DeviceFileIO.Droid
 {
@@ -36,6 +37,9 @@ namespace Device2DeviceFileIO.Droid
             global::ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
             LoadApplication(new App());
+
+            var sh = new ShareHandler();
+            sh.HandleIntent(this);
 
             MessagingCenter.Subscribe<FileOperation.UploadMessage>(this, FileOperation.UPLOAD, message => {
 
