@@ -1,4 +1,6 @@
-﻿using Device2DeviceFileIO.Classes;
+﻿using System;
+using System.IO;
+using Device2DeviceFileIO.Classes;
 using Device2DeviceFileIO.Pages;
 using Xamarin.Forms;
 
@@ -29,31 +31,59 @@ namespace Device2DeviceFileIO
                 await Navigation.PushAsync(new BarcodePage());
             };
 
-            btnUploadFile.Clicked += (object sender, System.EventArgs e) =>
-            {
+            btnUploadFile.Clicked += (object sender, System.EventArgs e) => {
 
-                MessagingCenter.Send(new UploadFileMessage(), "UploadFileMessage");
+                var stream = this.GetType().Assembly.GetManifestResourceStream("Device2DeviceFileIO.Resources.MyFile.txt");
+
+                var transferFile = new TransferFile
+                {
+                    Name = "MyFile.txt"
+                };
+
+                var ms = new MemoryStream();
+                stream.CopyTo(ms);
+                transferFile.Content = ms.ToArray();
+
+                App.GetCloudFileService().Upload(transferFile, new QRCode());
             };
 
             btnDownloadFile.Clicked += (object sender, System.EventArgs e) =>
             {
-
-                MessagingCenter.Send(new DownloadFileMessage(), "DownloadFileMessage");
+                App.GetCloudFileService().Download(new TransferFile(), new QRCode { Url = edtDownloadLink.Text });
             };
 
-            MessagingCenter.Subscribe<FileProgressMessage>(this, "FileProgressMessage", HandleProgressMessage);
-
-            MessagingCenter.Subscribe<CancelledMessage>(this, "CancelledMessage", HandleCancelledMessage);
+            App.GetCloudFileService().DownloadFinished += Handle_DownloadFinished;
+            App.GetCloudFileService().OperationProgress += Handle_OperationProgress;
+            App.GetCloudFileService().OperationCanceled += Handle_OperationCanceled;
+            App.GetCloudFileService().UploadFinished += Handle_UploadFinished;
+            App.GetCloudFileService().OperationFailed += Handle_OperationFailed;
         }
 
-        public void HandleProgressMessage(FileProgressMessage message)
+        public void Handle_DownloadFinished(object sender, FileOperation.DownloadFinishedMessage e)
         {
-            prgUploadFile.Progress = message.Percentage;
+            Console.WriteLine($"File downloaded: {e.Content}");
         }
 
-        public void HandleCancelledMessage(CancelledMessage message)
+        public void Handle_OperationProgress(object sender, FileOperation.ProgressMessage e)
+        {
+            prgUploadFile.Progress = e.Percentage;
+        }
+
+        public void Handle_OperationCanceled(object sender, FileOperation.CanceledMessage e)
         {
             prgUploadFile.Progress = 0;
+        }
+
+        public void Handle_UploadFinished(object sender, FileOperation.UploadFinishedMessage e)
+        {
+            edtDownloadLink.Text = e.Result;
+            
+            Console.WriteLine($"File uploaded: {e.Result}");
+        }
+
+        public void Handle_OperationFailed(object sender, FileOperation.FailedMessage e)
+        {
+            Console.WriteLine($"File operation failed: {e.Error}");
         }
     }
 }

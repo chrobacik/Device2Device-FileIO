@@ -17,14 +17,9 @@ using Android;
 
 namespace Device2DeviceFileIO.Droid
 {
-
-
-    [IntentFilter(
-        new[] { Intent.ActionSend }, 
-        Categories = new[] { Intent.CategoryDefault }, 
-        DataMimeType = @"*/*")]
+    [IntentFilter(new[] { Intent.ActionSend }, Categories = new[] { Intent.CategoryDefault }, DataMimeType = @"*/*")]
     [Activity(Label = "Device2Device-FileIO.Android", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static readonly int PickImageId = 1000;
         public TaskCompletionSource<String> PickImageTaskCompletionSource { set; get; }
@@ -42,9 +37,22 @@ namespace Device2DeviceFileIO.Droid
 
             LoadApplication(new App());
 
-            MessagingCenter.Subscribe<UploadFileMessage>(this, "UploadFileMessage", message => {
-                
+            MessagingCenter.Subscribe<FileOperation.UploadMessage>(this, FileOperation.UPLOAD, message => {
+
                 var intent = new Intent(this, typeof(FileService));
+                intent.PutExtra("operation", FileOperation.UPLOAD);
+                intent.PutExtra("file", message.FileName);
+                intent.PutExtra("content", message.Content);
+
+                StartService(intent);
+            });
+
+            MessagingCenter.Subscribe<FileOperation.DownloadMessage>(this, FileOperation.DOWNLOAD, message => {
+
+                var intent = new Intent(this, typeof(FileService));
+                intent.PutExtra("operation", FileOperation.DOWNLOAD);
+                intent.PutExtra("link", message.Link);
+
                 StartService(intent);
             });
         }

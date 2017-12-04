@@ -1,16 +1,17 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Device2DeviceFileIO.Classes;
 using Xamarin.Forms;
 
-
 namespace Device2DeviceFileIO.Droid.Services
 {
-    [Android.App.ServiceAttribute]
-    public class FileService : Android.App.Service
+    [Service]
+    public class FileService : Service
     {
         CancellationTokenSource _cts;
 
@@ -19,15 +20,50 @@ namespace Device2DeviceFileIO.Droid.Services
             return null;
         }
 
-        public override Android.App.StartCommandResult OnStartCommand(Intent intent, Android.App.StartCommandFlags flags, int startId)
+        public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
             _cts = new CancellationTokenSource();
 
             Task.Run(() => {
                 try
                 {
-                    var service = new Device2DeviceFileIO.Classes.FileIOFileService();
-                    service.UploadFile(_cts.Token).Wait();
+                    var operation = intent.GetStringExtra("operation");
+
+                    if (operation == FileOperation.UPLOAD)
+                    {
+                        var fileName = intent.GetStringExtra("file");
+                        var stream = new MemoryStream(intent.GetByteArrayExtra("content"));
+                        var service = App.GetCloudFileService();
+
+                        Task<String> task = service.UploadFileAsync(fileName, stream, _cts.Token);
+                        task.Wait();
+
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            MessagingCenter.Send(new FileOperation.UploadFinishedMessage
+                            {
+                                Result = task.Result
+
+                            }, FileOperation.UPLOAD_FINISHED);
+                        });
+                    }
+                    else if (operation == FileOperation.DOWNLOAD)
+                    {
+                        var link = intent.GetStringExtra("link");
+                        var service = App.GetCloudFileService();
+
+                        Task<byte[]> task = service.DownloadFileAsync(link, _cts.Token);
+                        task.Wait();
+
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            MessagingCenter.Send(new FileOperation.DownloadFinishedMessage
+                            {
+                                Content = task.Result
+
+                            }, FileOperation.DOWNLOAD_FINISHED);
+                        });
+                    }
                 }
                 catch (Android.OS.OperationCanceledException)
                 {
@@ -36,15 +72,16 @@ namespace Device2DeviceFileIO.Droid.Services
                 {
                     if (_cts.IsCancellationRequested)
                     {
-                        var message = new CancelledMessage();
-
-                        Device.BeginInvokeOnMainThread(() => MessagingCenter.Send(message, "CancelledMessage"));
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            MessagingCenter.Send(new FileOperation.CanceledMessage(), FileOperation.CANCELED);
+                        });
                     }
                 }
 
             }, _cts.Token);
 
-            return Android.App.StartCommandResult.Sticky;
+            return StartCommandResult.Sticky;
         }
 
         public override void OnDestroy()

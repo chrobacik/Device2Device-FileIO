@@ -1,10 +1,14 @@
-﻿using Device2DeviceFileIO.Pages;
+﻿using Device2DeviceFileIO.Classes;
+using Device2DeviceFileIO.Interfaces;
+using Device2DeviceFileIO.Pages;
 using Xamarin.Forms;
 
 namespace Device2DeviceFileIO
 {
     public partial class App : Application
     {
+        private static ICloudFileService mFileServiceInstance;
+
         public App()
         {
             InitializeComponent();
@@ -25,6 +29,16 @@ namespace Device2DeviceFileIO
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        public static ICloudFileService GetCloudFileService()
+        {
+            if (mFileServiceInstance == null)
+            {
+                mFileServiceInstance = new FileIOFileService();
+            }
+
+            return mFileServiceInstance;
         }
     }
 }

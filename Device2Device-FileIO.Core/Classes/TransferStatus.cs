@@ -1,24 +1,19 @@
 ﻿using System;
+
 namespace Device2DeviceFileIO.Classes
 {
     public class TransferStatus
     {
-
-        enum TypeState
+        public enum TypeState
         {
             Pending,
             Transfering,
             Completed,
             Aborted,
-            ReceivedFromOS,
-
+            ReceivedFromOS
         };
 
-        public double percentage { get; set; }
-
-        public TransferStatus()
-        {
-            
-        }
+        public TypeState State { get; set; }
+        public float Percentage { get; set; }
     }
 }

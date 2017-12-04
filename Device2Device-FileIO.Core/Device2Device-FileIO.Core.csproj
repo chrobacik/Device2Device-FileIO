@@ -27,10 +27,15 @@
     <Folder Include="Pages\" />
     <Folder Include="UI\" />
     <Folder Include="UI\ViewModel\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ZXing.Net.Mobile" Version="2.3.2" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.3.2" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.91635" />
+    <PackageReference Include="System.Json" Version="4.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MyFile.txt" />
   </ItemGroup>
 </Project>

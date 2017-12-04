@@ -9,6 +9,7 @@
 
             <ProgressBar x:Name="prgUploadFile" Progress="0"></ProgressBar>
             <Button x:Name="btnUploadFile" Text="Upload File"></Button>
+            <Entry x:Name="edtDownloadLink" Text=""></Entry>
             <Button x:Name="btnDownloadFile" Text="Download File"></Button>
         </StackLayout>
     </ContentPage.Content>
