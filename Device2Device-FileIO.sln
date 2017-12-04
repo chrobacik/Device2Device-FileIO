@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Device2Device-FileIO.Android", "Device2Device-FileIO.Android\Device2Device-FileIO.Android.csproj", "{5D64DAEA-7B7D-4039-989D-5E084A8990E4}"
 EndProject
@@ -24,6 +24,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5D64DAEA-7B7D-4039-989D-5E084A8990E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D64DAEA-7B7D-4039-989D-5E084A8990E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D64DAEA-7B7D-4039-989D-5E084A8990E4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{5D64DAEA-7B7D-4039-989D-5E084A8990E4}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{5D64DAEA-7B7D-4039-989D-5E084A8990E4}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{5D64DAEA-7B7D-4039-989D-5E084A8990E4}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
