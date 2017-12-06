@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.UI.View.TransferFileUploadPage">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="20, 40, 20, 20" />
+            <On Platform="Android" Value="20" />
+        </OnPlatform>
+    </ContentPage.Padding>
+
+    <StackLayout VerticalOptions="FillAndExpand"
+             HorizontalOptions="FillAndExpand"
+             Orientation="Vertical"
+             Spacing="15">
+
+            <Button x:Name="btnChooseFile" Text="Choose file" Command="{Binding ChooseFileCommand}"></Button>
+            <Button x:Name="btnStartUpload" Text="Start upload" Command="{Binding StartUploadCommand}"></Button>
+        </StackLayout>
+</ContentPage>

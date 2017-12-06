@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.UI.View.TransferFileOverviewPage">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="20, 40, 20, 20" />
+            <On Platform="Android" Value="20" />
+        </OnPlatform>
+    </ContentPage.Padding>
+
+        <StackLayout VerticalOptions="FillAndExpand"
+             HorizontalOptions="FillAndExpand"
+             Orientation="Vertical"
+             Spacing="15">
+
+            <Label Text="Filename" />
+            <Label Text="{Binding UploadTransferFile.Name}" />
+            <Label Text="Filesize" />
+            <Label Text="{Binding UploadTransferFile.Size}" />
+            <ProgressBar x:Name="prgUploadFile" Progress="0"></ProgressBar>
+            <Button x:Name="btnUploadFile" Text="Choose file to upload" Command="{Binding TransferFileUploadCommand}"></Button>
+           
+            <Label Text="Filename" />
+            <Label Text="{Binding DownloadTransferFile.Name}" />
+            <Label Text="Filesize" />
+            <Label Text="{Binding DownloadTransferFile.Size}" />
+            <ProgressBar x:Name="prgDownloadFile" Progress="0"></ProgressBar>
+            <Button x:Name="btnDownloadFile" Text="Scan file to download" Command="{Binding TransferFileUploadCommand}"></Button>
+        
+        </StackLayout>
+
+</ContentPage>
