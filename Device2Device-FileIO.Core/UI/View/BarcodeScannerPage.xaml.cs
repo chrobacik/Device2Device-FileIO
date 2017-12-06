@@ -15,7 +15,10 @@ namespace Device2DeviceFileIO.UI.View
 
             Title = "Scan Barcode";
 
-            BindingContext = new BarcodeScannerVm();
+            ViewModel = new BarcodeScannerVm();
+            ViewModel.Navigation = Navigation;
+
+            BindingContext = ViewModel;
 
             scannerView.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
 
@@ -28,46 +31,8 @@ namespace Device2DeviceFileIO.UI.View
                 MessagingCenter.Send<object, string>(this, "QRCodeScanned", result.Text);
 
                 // Navigate away
-                await Navigation.PopAsync();
+                await Navigation.PushAsync(new TransferFileDownloadPage());
             });
-
-            /*
-            mZxing = new ZXingScannerView
-            {
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                AutomationId = "ZxingScannerView",
-                BackgroundColor = Color.Transparent
-            };
-            */
-
-            /*
-            mZxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
-
-                // Stop analysis until we navigate away so we don't keep reading barcodes
-                mZxing.IsAnalyzing = false;
-
-                // Show an alert
-                await DisplayAlert("Scanned Barcode", result.Text, "OK");
-
-                // Navigate away
-                await Navigation.PopAsync();
-            });
-            */
-
-            /*
-            mOverlay = new ZXingDefaultOverlay
-            {
-                TopText = "Hold your phone up to the barcode",
-                BottomText = "Scanning will happen automatically",
-                ShowFlashButton = mZxing.HasTorch,
-                AutomationId = "ZxingDefaultOverlay",
-            };
-
-            defaultOverlay.FlashButtonClicked += (sender, e) => {
-                mZxing.IsTorchOn = !mZxing.IsTorchOn;
-            };
-            */
         }
 
         protected override void OnAppearing()

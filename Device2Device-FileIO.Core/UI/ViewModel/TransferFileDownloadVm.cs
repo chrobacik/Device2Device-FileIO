@@ -11,5 +11,14 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         public INavigation Navigation { get; set; }
 
+        // lazy instantiation
+        private ICommand _startDownloadCommand;
+        public ICommand StartDownloadCommand => _startDownloadCommand ?? (_startDownloadCommand = new Command(() => StartDownload()));
+
+        async public void StartDownload()
+        {
+            await Navigation.PopAsync();
+        }
+
     }
 }

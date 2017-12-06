@@ -34,12 +34,12 @@ namespace Device2DeviceFileIO.UI.ViewModel
         }
 
         // lazy instantiation
-        private ICommand _tranferFileDownloadCmd;
-        public ICommand TranferFileDownloadCommand => _tranferFileDownloadCmd ?? (_tranferFileDownloadCmd = new Command(() => TransferFileDownload()));
+        private ICommand _readyToReceiveCommand;
+        public ICommand ReadyToReceiveCommand => _readyToReceiveCommand ?? (_readyToReceiveCommand = new Command(() => ReadyToReceive()));
 
-        async public void TransferFileDownload()
+        async public void ReadyToReceive()
         {
-            await Navigation.PushAsync(new TransferFileDownloadPage());
+            await Navigation.PushAsync(new QRCodeScanPage());
         }
 
         // lazy instantiation
@@ -52,18 +52,12 @@ namespace Device2DeviceFileIO.UI.ViewModel
         }
 
         // lazy instantiation
-        private ICommand _scannedCmd;
-        public ICommand ScannedCommand => _scannedCmd ?? (_scannedCmd = new Command(() => Scanned()));
+        private ICommand _shareCommand;
+        public ICommand ShareCommand => _shareCommand ?? (_shareCommand = new Command(() => Share()));
 
-        async public void Scanned()
+        async public void Share()
         {
-
-            DownloadTransferFile = new TransferFile();
-            DownloadTransferFile.Name = "datei_bild.png";
-            DownloadTransferFile.Size = 100;
-            DownloadTransferFile.Status = new TransferStatus();
-
-            await Navigation.PopAsync();
+            // TODO
         }
     }
 }

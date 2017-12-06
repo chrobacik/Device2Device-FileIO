@@ -28,6 +28,15 @@ namespace Device2DeviceFileIO.UI.ViewModel
         }
 
         // lazy instantiation
+        private ICommand _tranferFileDownloadCmd;
+        public ICommand TranferFileDownloadCommand => _tranferFileDownloadCmd ?? (_tranferFileDownloadCmd = new Command(() => TransferFileDownload()));
+
+        async public void TransferFileDownload()
+        {
+            await Navigation.PushAsync(new TransferFileDownloadPage());
+        }
+
+        // lazy instantiation
         /*
         private ICommand _qRScanResultCommand;
         public ICommand QRScanResultCommand => _qRScanResultCommand ?? (_qRScanResultCommand = new Command(() => QRScanResult()));

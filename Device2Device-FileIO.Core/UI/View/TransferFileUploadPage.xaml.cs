@@ -15,6 +15,9 @@ namespace Device2DeviceFileIO.UI.View
 
             Title = "Upload tranfer file";
 
+            ViewModel = new TransferFileUploadVm();
+            ViewModel.Navigation = Navigation;
+
             BindingContext = ViewModel;
 
         }

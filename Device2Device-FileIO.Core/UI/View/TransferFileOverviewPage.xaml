@@ -1,42 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.UI.View.TransferFileOverviewPage">
 
+<ScrollView>
     <StackLayout Spacing="0" Padding="0">
 
-        <StackLayout Spacing="0" Padding="16" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-            <Button x:Name="btnUploadFile" Text="Upload Icon" Command="{Binding TransferFileUploadCommand}"></Button>
-            <ProgressBar x:Name="prgUploadFile" Progress="0"></ProgressBar>
+            <Button x:Name="btnUploadFile" TextColor="Black" Text="Upload Icon" Command="{Binding TransferFileUploadCommand}"></Button>
 
-            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
-                <Label FontSize="14" Text="Filename:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
+                <Label Text="Filename:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
                 <Label Text="{Binding UploadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
             </StackLayout>
-            <Button x:Name="btnReadyToReceive" Text="Bereit zum empfangen" Command="{Binding TransferFileUploadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}"></Button>
-
-        </StackLayout>
-
-        <StackLayout Spacing="0" Padding="16,0,16,0">
-            <BoxView BackgroundColor="White" HeightRequest="1" />
-        </StackLayout>
-
-        <StackLayout Spacing="0" Padding="16" BackgroundColor="{StaticResource backgroundColorDownload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
-            <Button x:Name="btnDownloadFile" Text="Download Icon" Command="{Binding TransferFileUploadCommand}"></Button>
-            <ProgressBar x:Name="prgDownloadFile" Progress="0"></ProgressBar>
             
-            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
-                <Label FontSize="14" Text="Filename:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+            <BoxView HeightRequest="8" />
+            
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16" HorizontalOptions="FillAndExpand">
+                <ProgressBar x:Name="prgUploadFile" Progress="0.4" HorizontalOptions="FillAndExpand"></ProgressBar>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Padding="0,32,0,16" HorizontalOptions="FillAndExpand">
+                <Button x:Name="btnReadyToReceive" TextColor="Black" Text="Bereit zum empfangen" Command="{Binding ReadyToReceiveCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+
+        </StackLayout>
+
+        <BoxView BackgroundColor="White" HeightRequest="4" />
+
+        <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorDownload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Button x:Name="btnDownloadFile" TextColor="Black" Text="Download Icon" Command="{Binding BarcodeScannerCommand}"></Button>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
+                <Label Text="Filename:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
                 <Label Text="{Binding DownloadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
             </StackLayout>
-            <Button x:Name="btnShare" Text="Teilen" Command="{Binding TransferFileUploadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}"></Button>
+            
+            <BoxView HeightRequest="8" />
+            
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16" HorizontalOptions="FillAndExpand">
+                <ProgressBar x:Name="prgDownloadFile" Progress="0.4" HorizontalOptions="FillAndExpand"></ProgressBar>
+            </StackLayout>
 
+
+            <StackLayout Orientation="Horizontal" Padding="0,32,0,16" HorizontalOptions="FillAndExpand">
+                <Button x:Name="btnShare" TextColor="Black" Text="Teilen" Command="{Binding ShareCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
 
         </StackLayout>
-       
         
     </StackLayout>
-
-
-
+    </ScrollView>
 </ContentPage>

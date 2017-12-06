@@ -12,6 +12,11 @@ namespace Device2DeviceFileIO.UI.View
         public QRCodeScanPage()
         {
             InitializeComponent();
+
+            ViewModel = new QRCodeScanVm();
+            ViewModel.Navigation = Navigation;
+
+            BindingContext = ViewModel;
         }
     }
 }
