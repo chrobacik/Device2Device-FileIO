@@ -32,8 +32,6 @@ namespace Device2DeviceFileIO.Test
             var service = new FileIOFileService();
             var stream = this.GetSampleFileStream("Device2DeviceFileIO.Test.Resources.MyFile.txt");
 
-            Task<String> result = service.UploadFileAsync(stream);
-            result.Wait();
 
             Assert.Fail();
         }
