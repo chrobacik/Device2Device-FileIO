@@ -11,6 +11,8 @@
     <None Remove="Device2Device-FileIOPage.xaml" />
     <None Remove="Pages\Device2Device-FileIOPage.xaml" />
     <None Remove="Resources\MyFile.txt" />
+    <None Remove="Resources\ic_download.png" />
+    <None Remove="Resources\ic_upload.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Pages\SendFilePage.xaml.cs">
@@ -39,5 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MyFile.txt" />
+    <EmbeddedResource Include="Resources\ic_download.png" />
+    <EmbeddedResource Include="Resources\ic_upload.png" />
   </ItemGroup>
 </Project>

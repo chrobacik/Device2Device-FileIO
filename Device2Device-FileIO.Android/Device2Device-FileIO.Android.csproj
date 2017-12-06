@@ -152,6 +152,18 @@
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
     <AndroidResource Include="Resources\layout\Toolbar.axml" />
     <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\drawable\ic_download.png" />
+    <AndroidResource Include="Resources\drawable\ic_upload.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_download.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_upload.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_download.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_upload.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_download.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_upload.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_download.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_upload.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_download.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_upload.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Device2Device-FileIO.Core\Device2Device-FileIO.Core.csproj">
