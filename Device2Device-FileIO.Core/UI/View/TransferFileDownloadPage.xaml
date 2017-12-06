@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.UI.View.TransferFileDownloadPage">
+    
+    <StackLayout Spacing="0" Padding="0">
 
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="iOS" Value="20, 40, 20, 20" />
-            <On Platform="Android" Value="20" />
-        </OnPlatform>
-    </ContentPage.Padding>
+        <StackLayout Spacing="0" Padding="16" BackgroundColor="{StaticResource backgroundColorDownload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-    <StackLayout VerticalOptions="FillAndExpand"
-         HorizontalOptions="FillAndExpand"
-         Orientation="Vertical"
-         Spacing="15">
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Name:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
 
-        <Button x:Name="btnScanBarcode" Text="Scan Barcode" Command="{Binding ScanBarcodeCommand}"></Button>
-        <Button x:Name="btnStartDownload" Text="Start download" Command="{Binding ScannedCommand}"></Button>
-    </StackLayout>   
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Grösse:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Size}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Type:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Type}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Ablaufdatum:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="22.12.2017" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+            
+            <Button x:Name="btnStartUpload" Text="Empfangen" Command="{Binding StartUploadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}"></Button>
+
+
+        </StackLayout>
+
+    </StackLayout>
     
 </ContentPage>

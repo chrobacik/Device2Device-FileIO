@@ -2,9 +2,11 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.App">
 	<Application.Resources>
 		<!-- Application resource dictionary -->
-        <!--Color x:Key="backgroundColorDefault">#2ebced</Color -->
-        <!--Color x:Key="backgroundColorUpload">#e5cf33</Color -->
-        <!--Color x:Key="backgroundColorDownload">#4dd6b2</Color -->
-        <!--Color x:Key="textColor">Black</Color -->
+        <ResourceDictionary>
+            <Color x:Key="backgroundColorDefault">#2ebced</Color>
+            <Color x:Key="backgroundColorUpload">#e5cf33</Color>
+            <Color x:Key="backgroundColorDownload">#4dd6b2</Color>
+            <Color x:Key="textColor">Black</Color>
+        </ResourceDictionary>
 	</Application.Resources>
 </Application>

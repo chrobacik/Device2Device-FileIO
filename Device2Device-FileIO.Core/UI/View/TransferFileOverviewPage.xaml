@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.UI.View.TransferFileOverviewPage">
 
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="iOS" Value="20, 40, 20, 20" />
-            <On Platform="Android" Value="20" />
-        </OnPlatform>
-    </ContentPage.Padding>
+    <StackLayout Spacing="0" Padding="0">
 
-        <StackLayout VerticalOptions="FillAndExpand"
-             HorizontalOptions="FillAndExpand"
-             Orientation="Vertical"
-             Spacing="15">
+        <StackLayout Spacing="0" Padding="16" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-            <Label Text="Filename" />
-            <Label Text="{Binding UploadTransferFile.Name}" />
-            <Label Text="Filesize" />
-            <Label Text="{Binding UploadTransferFile.Size}" />
+            <Button x:Name="btnUploadFile" Text="Upload Icon" Command="{Binding TransferFileUploadCommand}"></Button>
             <ProgressBar x:Name="prgUploadFile" Progress="0"></ProgressBar>
-            <Button x:Name="btnUploadFile" Text="Choose file to upload" Command="{Binding TransferFileUploadCommand}"></Button>
-           
-            <Label Text="Filename" />
-            <Label Text="{Binding DownloadTransferFile.Name}" />
-            <Label Text="Filesize" />
-            <Label Text="{Binding DownloadTransferFile.Size}" />
-            <ProgressBar x:Name="prgDownloadFile" Progress="0"></ProgressBar>
-            <Button x:Name="btnDownloadFile" Text="Scan file to download" Command="{Binding TransferFileUploadCommand}"></Button>
-        
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Filename:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+            <Button x:Name="btnReadyToReceive" Text="Bereit zum empfangen" Command="{Binding TransferFileUploadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}"></Button>
+
         </StackLayout>
+
+        <StackLayout Spacing="0" Padding="16,0,16,0">
+            <BoxView BackgroundColor="White" HeightRequest="1" />
+        </StackLayout>
+
+        <StackLayout Spacing="0" Padding="16" BackgroundColor="{StaticResource backgroundColorDownload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Button x:Name="btnDownloadFile" Text="Download Icon" Command="{Binding TransferFileUploadCommand}"></Button>
+            <ProgressBar x:Name="prgDownloadFile" Progress="0"></ProgressBar>
+            
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Filename:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding DownloadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+            <Button x:Name="btnShare" Text="Teilen" Command="{Binding TransferFileUploadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}"></Button>
+
+
+        </StackLayout>
+       
+        
+    </StackLayout>
+
+
 
 </ContentPage>

@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.UI.View.QRCodeScanPage">
-	<ContentPage.Content>
-	</ContentPage.Content>
+    
+    <StackLayout Spacing="0" Padding="0">
+        
+        <StackLayout Spacing="0" Padding="16" BackgroundColor="{StaticResource backgroundColorDownload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Image x:Name="qRCodeImage" ></Image>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Name:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Grösse:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Size}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Type:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Type}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Ablaufdatum:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="22.12.2017" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+        </StackLayout>
+
+    </StackLayout>
+    
 </ContentPage>

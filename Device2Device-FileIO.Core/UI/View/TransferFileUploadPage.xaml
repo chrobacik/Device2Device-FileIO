@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.UI.View.TransferFileUploadPage">
 
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="iOS" Value="20, 40, 20, 20" />
-            <On Platform="Android" Value="20" />
-        </OnPlatform>
-    </ContentPage.Padding>
+    <StackLayout Spacing="0" Padding="0">
 
-    <StackLayout VerticalOptions="FillAndExpand"
-             HorizontalOptions="FillAndExpand"
-             Orientation="Vertical"
-             Spacing="15">
+        <StackLayout Spacing="0" Padding="16" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-            <Button x:Name="btnChooseFile" Text="Choose file" Command="{Binding ChooseFileCommand}"></Button>
-            <Button x:Name="btnStartUpload" Text="Start upload" Command="{Binding StartUploadCommand}"></Button>
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Name:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Grösse:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Size}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Type:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Type}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Übertragungsstatus:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="{Binding UploadTransferFile.Status.State}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                <Label FontSize="14" Text="Ablaufdatum:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Label Text="22.12.2017" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Padding="8">
+                <Button x:Name="btnStartUpload" Text="Senden" Command="{Binding StartUploadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}"></Button>
+            </StackLayout>            
+
         </StackLayout>
+
+    </StackLayout>
+
 </ContentPage>
