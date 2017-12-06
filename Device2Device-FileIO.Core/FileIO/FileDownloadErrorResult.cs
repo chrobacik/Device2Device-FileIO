@@ -6,7 +6,7 @@ namespace Device2DeviceFileIO.FileIO
     /// <summary>
     /// File download error result
     /// 
-    /// Example: {"success":false,"error":404,"message":"Not Found"}
+    /// Example: {\"success\":false,\"error\":404,\"message\":\"Not Found\"}
     /// </summary>
     [JsonObject]
     public class FileDownloadErrorResult

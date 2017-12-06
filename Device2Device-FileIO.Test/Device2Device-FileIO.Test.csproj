@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileServiceTest.cs" />
+    <Compile Include="FileUploadResultTest.cs" />
+    <Compile Include="FileDownloadErrorResultTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
