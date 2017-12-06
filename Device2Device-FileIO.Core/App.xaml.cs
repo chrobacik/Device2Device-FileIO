@@ -35,7 +35,7 @@ namespace Device2DeviceFileIO
         {
             if (mFileServiceInstance == null)
             {
-                mFileServiceInstance = new FileIOFileService();
+                mFileServiceInstance = new FileIO.FileService(new PlaceboFileCryptor());
             }
 
             return mFileServiceInstance;

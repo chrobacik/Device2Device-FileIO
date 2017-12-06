@@ -1,19 +1,13 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using System.Threading.Tasks;
 using Android.Provider;
-using Android.Net;
 using Xamarin.Forms;
 using Device2DeviceFileIO.Classes;
 using Device2DeviceFileIO.Droid.Services;
-using Android;
 using Device2DeviceFileIO.Droid.Classes;
 
 namespace Device2DeviceFileIO.Droid
@@ -43,21 +37,12 @@ namespace Device2DeviceFileIO.Droid
 
             MessagingCenter.Subscribe<FileOperation.UploadMessage>(this, FileOperation.UPLOAD, message => {
 
-                var intent = new Intent(this, typeof(FileService));
-                intent.PutExtra("operation", FileOperation.UPLOAD);
-                intent.PutExtra("file", message.FileName);
-                intent.PutExtra("content", message.Content);
-
-                StartService(intent);
+                StartService(new Intent(this, typeof(FileUploadService)));
             });
 
             MessagingCenter.Subscribe<FileOperation.DownloadMessage>(this, FileOperation.DOWNLOAD, message => {
 
-                var intent = new Intent(this, typeof(FileService));
-                intent.PutExtra("operation", FileOperation.DOWNLOAD);
-                intent.PutExtra("link", message.Link);
-
-                StartService(intent);
+                StartService(new Intent(this, typeof(FileDownloadService)));
             });
         }
 

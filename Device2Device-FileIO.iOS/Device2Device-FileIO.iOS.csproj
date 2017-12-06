@@ -189,6 +189,8 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Services\FileDownloadTask.cs" />
+    <Compile Include="Services\FileUploadTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Device2Device-FileIO.Core\Device2Device-FileIO.Core.csproj">

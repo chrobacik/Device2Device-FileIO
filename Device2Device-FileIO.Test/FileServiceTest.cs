@@ -29,7 +29,7 @@ namespace Device2DeviceFileIO.Test
         [Test()]
         public void SendFileTest()
         {
-            var service = new FileIOFileService();
+            var service = new FileIO.FileService();
             var stream = this.GetSampleFileStream("Device2DeviceFileIO.Test.Resources.MyFile.txt");
 
 
