@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.IO;
 using System.Threading;
 using Device2DeviceFileIO.Classes;
 
@@ -11,15 +10,20 @@ namespace Device2DeviceFileIO.Interfaces
     /// </summary>
     public interface ICloudFileService
     {
-        void Upload(TransferFile file, QRCode qRCode);
-        void Download(TransferFile file, QRCode qRCode);
-        Task<String> UploadFileAsync(String fileName, Stream content, CancellationToken token);
-        Task<byte[]> DownloadFileAsync(String link, CancellationToken token);
+        void Upload(TransferFile file);
+        void Upload(TransferFile file, DateTime expiration);
+        TransferFile Download(QRCode qRCode);
+        TransferFile Download(QRCode qRCode, TransferFile file);
 
-        event EventHandler<FileOperation.DownloadFinishedMessage> DownloadFinished;
-        event EventHandler<FileOperation.CanceledMessage> OperationCanceled;
-        event EventHandler<FileOperation.ProgressMessage> OperationProgress;
-        event EventHandler<FileOperation.FailedMessage> OperationFailed;
-        event EventHandler<FileOperation.UploadFinishedMessage> UploadFinished;
+        void CancelUpload();
+        void CancelDownload();
+
+        Task UploadFileAsync(CancellationTokenSource cancellation);
+        Task DownloadFileAsync(CancellationTokenSource cancellation);
+
+        event EventHandler<FileOperation.UploadProgressEventArgs> UploadProgress;
+        event EventHandler<FileOperation.UploadFinishedEventArgs> UploadFinished;
+        event EventHandler<FileOperation.DownloadProgressEventArgs> DownloadProgress;
+        event EventHandler<FileOperation.DownloadFinsihedEventArgs> DownloadFinished;
     }
 }

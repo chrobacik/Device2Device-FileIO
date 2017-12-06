@@ -33,57 +33,47 @@ namespace Device2DeviceFileIO
 
             btnUploadFile.Clicked += (object sender, System.EventArgs e) => {
 
-                var stream = this.GetType().Assembly.GetManifestResourceStream("Device2DeviceFileIO.Resources.MyFile.txt");
-
-                var transferFile = new TransferFile
-                {
-                    Name = "MyFile.txt"
-                };
+                var stream = this.GetType().Assembly.GetManifestResourceStream("Device2DeviceFileIO.Resources.EarthLarge.jpg");
+                var transferFile = new TransferFile { Name = "EarthLarge.jpg" };
 
                 var ms = new MemoryStream();
                 stream.CopyTo(ms);
                 transferFile.Content = ms.ToArray();
 
-                App.GetCloudFileService().Upload(transferFile, new QRCode());
+                App.GetCloudFileService().Upload(transferFile);
             };
 
             btnDownloadFile.Clicked += (object sender, System.EventArgs e) =>
             {
-                App.GetCloudFileService().Download(new TransferFile(), new QRCode { Url = edtDownloadLink.Text });
+                App.GetCloudFileService().Download(new QRCode { Url = edtDownloadLink.Text });
             };
 
             App.GetCloudFileService().DownloadFinished += Handle_DownloadFinished;
-            App.GetCloudFileService().OperationProgress += Handle_OperationProgress;
-            App.GetCloudFileService().OperationCanceled += Handle_OperationCanceled;
+            App.GetCloudFileService().DownloadProgress += Handle_DownloadProgress;
+            App.GetCloudFileService().UploadProgress += Handle_UploadProgress;
             App.GetCloudFileService().UploadFinished += Handle_UploadFinished;
-            App.GetCloudFileService().OperationFailed += Handle_OperationFailed;
         }
 
-        public void Handle_DownloadFinished(object sender, FileOperation.DownloadFinishedMessage e)
+        public void Handle_DownloadFinished(object sender, FileOperation.DownloadFinsihedEventArgs e)
         {
-            Console.WriteLine($"File downloaded: {e.Content}");
+            Console.WriteLine($"File downloaded: {e.File.Name}");
         }
 
-        public void Handle_OperationProgress(object sender, FileOperation.ProgressMessage e)
+        public void Handle_DownloadProgress(object sender, FileOperation.DownloadProgressEventArgs e)
         {
-            prgUploadFile.Progress = e.Percentage;
+            prgDownloadFile.Progress = e.File.Status.Percentage;
         }
 
-        public void Handle_OperationCanceled(object sender, FileOperation.CanceledMessage e)
+        public void Handle_UploadProgress(object sender, FileOperation.UploadProgressEventArgs e)
         {
-            prgUploadFile.Progress = 0;
+            prgUploadFile.Progress = e.File.Status.Percentage;
         }
 
-        public void Handle_UploadFinished(object sender, FileOperation.UploadFinishedMessage e)
+        public void Handle_UploadFinished(object sender, FileOperation.UploadFinishedEventArgs e)
         {
-            edtDownloadLink.Text = e.Result;
-            
-            Console.WriteLine($"File uploaded: {e.Result}");
-        }
+            edtDownloadLink.Text = e.Code.Url;
 
-        public void Handle_OperationFailed(object sender, FileOperation.FailedMessage e)
-        {
-            Console.WriteLine($"File operation failed: {e.Error}");
+            Console.WriteLine($"File uploaded: {e.Code.Url}");
         }
     }
 }

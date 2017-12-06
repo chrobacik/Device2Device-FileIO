@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿using Device2DeviceFileIO.Classes;
+using Device2DeviceFileIO.iOS.Services;
 using Foundation;
 using UIKit;
-using ZXing;
+using Xamarin.Forms;
 
 namespace Device2DeviceFileIO.iOS
 {
@@ -17,6 +15,16 @@ namespace Device2DeviceFileIO.iOS
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 
             LoadApplication(new App());
+
+            MessagingCenter.Subscribe<FileOperation.UploadMessage>(this, FileOperation.UPLOAD, async message => {
+
+                await new FileUploadTask().Start();
+            });
+
+            MessagingCenter.Subscribe<FileOperation.DownloadMessage>(this, FileOperation.DOWNLOAD, async message => {
+
+                await new FileDownloadTask().Start();
+            });
 
             return base.FinishedLaunching(app, options);
         }
