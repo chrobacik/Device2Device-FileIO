@@ -38,6 +38,9 @@
       <HintPath>..\packages\Plugin.FileUploader.1.3.5\lib\netstandard1.0\Plugin.FileUploader.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Test.cs" />
