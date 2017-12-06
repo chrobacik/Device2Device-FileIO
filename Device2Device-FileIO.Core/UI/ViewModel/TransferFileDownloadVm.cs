@@ -11,13 +11,20 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         public INavigation Navigation { get; set; }
 
+        private TransferFile _downloadTransferFile;
+        public TransferFile DownloadTransferFile
+        {
+            get { return _downloadTransferFile; }
+            set { SetProperty(ref _downloadTransferFile, value); }
+        }
+
         // lazy instantiation
         private ICommand _startDownloadCommand;
         public ICommand StartDownloadCommand => _startDownloadCommand ?? (_startDownloadCommand = new Command(() => StartDownload()));
 
         async public void StartDownload()
         {
-            await Navigation.PopAsync();
+            await Navigation.PopToRootAsync();
         }
 
     }

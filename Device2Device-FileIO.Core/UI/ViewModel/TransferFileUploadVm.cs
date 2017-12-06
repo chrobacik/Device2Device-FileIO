@@ -11,6 +11,13 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         public INavigation Navigation { get; set; }
 
+        private TransferFile _uploadTransferFile;
+        public TransferFile UploadTransferFile
+        {
+            get { return _uploadTransferFile; }
+            set { SetProperty(ref _uploadTransferFile, value); }
+        }
+
         // lazy instantiation
         private ICommand _startUploadCommand;
         public ICommand StartUploadCommand => _startUploadCommand ?? (_startUploadCommand = new Command(() => StartUpload()));

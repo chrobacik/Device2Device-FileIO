@@ -7,21 +7,21 @@
 
             <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
                 <Label Text="Name:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
-                <Label Text="{Binding UploadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
+                <Label Text="{Binding DownloadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
             </StackLayout>
             
             <BoxView HeightRequest="8" />
 
             <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
                 <Label Text="Grösse:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
-                <Label Text="{Binding UploadTransferFile.Size}" HorizontalOptions="FillAndExpand" />
+                <Label Text="{Binding DownloadTransferFile.Size}" HorizontalOptions="FillAndExpand" />
             </StackLayout>
 
             <BoxView HeightRequest="8" />
 
             <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
                 <Label Text="Type:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
-                <Label Text="{Binding UploadTransferFile.Type}" HorizontalOptions="FillAndExpand" />
+                <Label Text="{Binding DownloadTransferFile.Type}" HorizontalOptions="FillAndExpand" />
             </StackLayout>
 
             <BoxView HeightRequest="8" />
