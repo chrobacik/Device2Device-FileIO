@@ -6,11 +6,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Device2Device-FileIO.Androi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Device2Device-FileIO.iOS", "Device2Device-FileIO.iOS\Device2Device-FileIO.iOS.csproj", "{667671FC-4CA8-4234-BE90-CCD944F061BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Device2Device-FileIO.Core", "Device2Device-FileIO.Core\Device2Device-FileIO.Core.csproj", "{9BA9B008-9926-4FB1-9A38-62BD9E1D0ED6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Device2Device-FileIO.Core", "Device2Device-FileIO.Core\Device2Device-FileIO.Core.csproj", "{9BA9B008-9926-4FB1-9A38-62BD9E1D0ED6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Device2Device-FileIO.Test", "Device2Device-FileIO.Test\Device2Device-FileIO.Test.csproj", "{3A76BC34-A414-4E2C-A095-7C72A55755BE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Device2Device-FileIO.Net", "Device2Device-FileIO.Net\Device2Device-FileIO.Net.csproj", "{533175F3-8702-44B7-96F7-C24AE54131D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,18 +69,6 @@ Global
 		{3A76BC34-A414-4E2C-A095-7C72A55755BE}.Release|iPhone.Build.0 = Release|Any CPU
 		{3A76BC34-A414-4E2C-A095-7C72A55755BE}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{3A76BC34-A414-4E2C-A095-7C72A55755BE}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Release|iPhone.Build.0 = Release|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{533175F3-8702-44B7-96F7-C24AE54131D1}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
