@@ -32,7 +32,7 @@ namespace Device2DeviceFileIO.FileIO
 
         protected TransferOperation CurrentUpload { get; set; }
         protected TransferOperation CurrentDownload { get; set; }
-        protected IFileCryptor mFileCryptor { get; set; }
+        protected IFileCryptor FileCryptor { get; set; }
 
         public event EventHandler<FileOperation.UploadFinishedEventArgs> UploadFinished;
         public event EventHandler<FileOperation.UploadProgressEventArgs> UploadProgress;
@@ -45,7 +45,7 @@ namespace Device2DeviceFileIO.FileIO
 
         public FileService(IFileCryptor cryptor)
         {
-            mFileCryptor = cryptor;
+            FileCryptor = cryptor;
         }
 
         /// <summary>
@@ -56,7 +56,11 @@ namespace Device2DeviceFileIO.FileIO
         /// <returns>The upload URL to send file to</returns>
         protected String BuildUploadURL(String url)
         {
-            var builder = new UriBuilder(url) { Query = $"expires={DEFAULT_EXPIRATION_IN_DAYS.ToString()}" };
+            var builder = new UriBuilder(url)
+            { 
+                Query = $"expires={DEFAULT_EXPIRATION_IN_DAYS.ToString()}",
+                Port = -1 // This will remove any port number
+            };
 
             return builder.ToString();
         }
@@ -129,17 +133,7 @@ namespace Device2DeviceFileIO.FileIO
         /// <param name="qRCode">QR code with information to download file</param>
         public TransferFile Download(QRCode qRCode)
         {
-            var transferFile = new TransferFile
-            {
-                Name = qRCode.FileName,
-                Status = new TransferStatus
-                {
-                    State = TransferStatus.TypeState.Transfering,
-                    Percentage = 0F
-                }
-            };
-
-            return Download(qRCode, transferFile);
+            return Download(qRCode, new TransferFile());
         }
 
         /// <summary>
@@ -151,6 +145,10 @@ namespace Device2DeviceFileIO.FileIO
         {
             try
             {
+                // Change file state before start download process
+                file.Status.State = TransferStatus.TypeState.Transfering;
+                file.Status.Percentage = 0F;
+
                 CurrentDownload = new TransferOperation(file, qRCode);
 
                 MessagingCenter.Send(new FileOperation.DownloadMessage(), FileOperation.DOWNLOAD);
@@ -200,7 +198,7 @@ namespace Device2DeviceFileIO.FileIO
                 var dataContent = new MultipartFormDataContent();
 
                 // Enrypt file content for upload
-                mFileCryptor.Encrypt(CurrentUpload.File, CurrentUpload.Code);
+                FileCryptor.Encrypt(CurrentUpload.File, CurrentUpload.Code);
 
                 var streamContent = new StreamContent(new MemoryStream(CurrentUpload.File.Content));
                 dataContent.Add(streamContent, "file", CurrentUpload.File.Name);
@@ -293,7 +291,7 @@ namespace Device2DeviceFileIO.FileIO
                 CurrentDownload.File.Size = response.Content.Headers.ContentLength ?? 0;
 
                 // Decrypt file content after download
-                mFileCryptor.Decrypt(CurrentDownload.File, CurrentDownload.Code);
+                FileCryptor.Decrypt(CurrentDownload.File, CurrentDownload.Code);
 
                 // Everything works fine, change state to completed
                 CurrentDownload.File.Status.State = TransferStatus.TypeState.Completed;
