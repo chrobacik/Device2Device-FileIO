@@ -13,7 +13,7 @@ namespace Device2DeviceFileIO.UI.View
         {
             InitializeComponent();
 
-            Title = "Upload tranfer file";
+            Title = "Upload";
 
             ViewModel = new TransferFileUploadVm();
             ViewModel.Navigation = Navigation;

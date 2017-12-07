@@ -13,7 +13,7 @@ namespace Device2DeviceFileIO.UI.View
         {
             InitializeComponent();
 
-            Title = "Scan Barcode";
+            Title = "Scanner";
 
             ViewModel = new BarcodeScannerVm();
             ViewModel.Navigation = Navigation;

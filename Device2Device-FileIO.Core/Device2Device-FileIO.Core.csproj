@@ -13,6 +13,9 @@
     <None Remove="Resources\MyFile.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="UI\View\MyPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Pages\SendFilePage.xaml.cs">
       <DependentUpon>..\..\Device2Device-FileIO\Pages\SendFilePage.xaml</DependentUpon>
     </Compile>
@@ -37,6 +40,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="System.Json" Version="4.4.0" />
     <PackageReference Include="SuaveControls.FloatingActionButton" Version="2017.11.27" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="UI\View\MyPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MyFile.txt" />

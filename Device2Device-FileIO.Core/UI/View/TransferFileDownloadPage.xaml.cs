@@ -13,7 +13,7 @@ namespace Device2DeviceFileIO.UI.View
         {
             InitializeComponent();
 
-            Title = "Scan tranfer file";
+            Title = "Download";
 
             ViewModel = new TransferFileDownloadVm();
             ViewModel.Navigation = Navigation;
