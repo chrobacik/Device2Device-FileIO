@@ -13,6 +13,8 @@ namespace Device2DeviceFileIO.UI.View
         {
             InitializeComponent();
 
+            Title = "Scan";
+
             ViewModel = new QRCodeScanVm();
             ViewModel.Navigation = Navigation;
 

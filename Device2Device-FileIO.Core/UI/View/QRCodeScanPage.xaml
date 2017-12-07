@@ -9,30 +9,54 @@
                 <Image x:Name="qRCodeImage" Source="qrcode.png" HorizontalOptions="CenterAndExpand"></Image>
             </StackLayout>
                 
-            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
-                <Label Text="Name:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
-                <Label Text="{Binding UploadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
-            </StackLayout>
-            
-            <BoxView HeightRequest="8" />
-
-            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
-                <Label Text="Grösse:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
-                <Label Text="{Binding UploadTransferFile.Size}" HorizontalOptions="FillAndExpand" />
-            </StackLayout>
-
-            <BoxView HeightRequest="8" />
-
-            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
-                <Label Text="Type:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
-                <Label Text="{Binding UploadTransferFile.Type}" HorizontalOptions="FillAndExpand" />
+            <StackLayout Spacing="0">
+                <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                    <Label Text="Name" Style="{StaticResource labelTabTitle}" />
+                </StackLayout>
+                <StackLayout Padding="8" BackgroundColor="#606060">
+                    <StackLayout Padding="4" BackgroundColor="#494949">
+                        <Label Text="{Binding UploadTransferFile.Name}" Style="{StaticResource labelTabContent}" />
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
 
             <BoxView HeightRequest="8" />
 
-            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
-                <Label Text="Ablaufdatum:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
-                <Label Text="6.12.2017" HorizontalOptions="FillAndExpand" />
+            <StackLayout Spacing="0">
+                <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                    <Label Text="Grösse" Style="{StaticResource labelTabTitle}" />
+                </StackLayout>
+                <StackLayout Padding="8" BackgroundColor="#606060">
+                    <StackLayout Padding="4" BackgroundColor="#494949">
+                        <Label Text="{Binding UploadTransferFile.Size}" Style="{StaticResource labelTabContent}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <BoxView HeightRequest="8" />
+
+            <StackLayout Spacing="0">
+                <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                    <Label Text="Type" Style="{StaticResource labelTabTitle}" />
+                </StackLayout>
+                <StackLayout Padding="8" BackgroundColor="#606060">
+                    <StackLayout Padding="4" BackgroundColor="#494949">
+                        <Label Text="{Binding UploadTransferFile.Type}" Style="{StaticResource labelTabContent}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <BoxView HeightRequest="8" />
+
+            <StackLayout Spacing="0">
+                <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                    <Label Text="Ablaufdatum" Style="{StaticResource labelTabTitle}" />
+                </StackLayout>
+                <StackLayout Padding="8" BackgroundColor="#606060">
+                    <StackLayout Padding="4" BackgroundColor="#494949">
+                        <Label Text="22.12.2017" Style="{StaticResource labelTabContent}" />
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
 
         </StackLayout>

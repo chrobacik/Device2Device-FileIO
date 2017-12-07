@@ -110,7 +110,7 @@ namespace Device2DeviceFileIO.FileIO
         public void Upload(TransferFile file, DateTime expiration)
         {
             // Check if upload is already running
-            if (CurrentUpload.IsRunning())
+            if (CurrentUpload?.IsRunning() == true)
             {
                 throw new ApplicationException("An upload process is already running.");
             }
@@ -156,7 +156,7 @@ namespace Device2DeviceFileIO.FileIO
         public TransferFile Download(QRCode qRCode, TransferFile file)
         {
             // Check if upload is already running
-            if (CurrentDownload.IsRunning())
+            if (CurrentDownload?.IsRunning() == true)
             {
                 throw new ApplicationException("A download process is already running.");
             }
