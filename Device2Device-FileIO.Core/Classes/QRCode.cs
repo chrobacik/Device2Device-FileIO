@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Xamarin.Forms;
+using ZXing.Rendering;
 
 namespace Device2DeviceFileIO.Classes
 {
@@ -19,7 +20,7 @@ namespace Device2DeviceFileIO.Classes
         public ImageSource CreateImage(int width, int height, int margin)
         {
             // Create QR code builder
-            var writer = new ZXing.BarcodeWriter<byte[]>
+            var writer = new ZXing.BarcodeWriter<PixelData>
             {
                 Format = ZXing.BarcodeFormat.QR_CODE,
                 Options = new ZXing.Common.EncodingOptions
@@ -27,13 +28,15 @@ namespace Device2DeviceFileIO.Classes
                     Width = width,
                     Height = height,
                     Margin = margin
-                }
+                },
+                Renderer = new PixelDataRenderer()
+
             };
 
             // Write data to QR code
             var barcode = writer.Write(GetData());
 
-            return ImageSource.FromStream(() => new MemoryStream(barcode));
+            return ImageSource.FromStream(() => new MemoryStream(barcode.Pixels));
         }
     }
 }
