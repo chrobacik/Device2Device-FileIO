@@ -27,7 +27,7 @@
             AutomationId="ZxingDefaultOverlay"
             TopText="Hold your phone up to the barcode" 
             BottomText="Scanning will happen automatically" 
-            ShowFlashButton="true" 
+            ShowFlashButton="true"
             Opacity="0.9">
         </forms:ZXingDefaultOverlay>
         

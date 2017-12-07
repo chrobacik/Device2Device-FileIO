@@ -11,8 +11,6 @@
     <None Remove="Device2Device-FileIOPage.xaml" />
     <None Remove="Pages\Device2Device-FileIOPage.xaml" />
     <None Remove="Resources\MyFile.txt" />
-    <None Remove="Resources\ic_download.png" />
-    <None Remove="Resources\ic_upload.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Pages\SendFilePage.xaml.cs">
@@ -38,10 +36,9 @@
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.91635" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="System.Json" Version="4.4.0" />
+    <PackageReference Include="SuaveControls.FloatingActionButton" Version="2017.11.27" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MyFile.txt" />
-    <EmbeddedResource Include="Resources\ic_download.png" />
-    <EmbeddedResource Include="Resources\ic_upload.png" />
   </ItemGroup>
 </Project>

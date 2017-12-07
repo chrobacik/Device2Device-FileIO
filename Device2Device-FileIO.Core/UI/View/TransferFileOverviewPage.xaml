@@ -5,10 +5,11 @@
     <StackLayout Spacing="0" Padding="0">
 
         <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+             
+            <StackLayout Orientation="Horizontal" Padding="0,0,0,32">
+                <Button x:Name="btnUploadFile" Image="ic_upload.png" Command="{Binding TransferFileUploadCommand}" WidthRequest="144" HeightRequest="144" ContentLayout="Top,0" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
                 
-            <Image x:Name="UploadIcon" WidthRequest="72" HeightRequest="72" Source="ic_upload.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Image>
-            <Button x:Name="btnUploadFile" TextColor="Black" Text="Upload Icon" Command="{Binding TransferFileUploadCommand}"></Button>
-
             <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
                 <Label Text="Filename:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
                 <Label Text="{Binding UploadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
@@ -27,13 +28,14 @@
 
         </StackLayout>
 
-        <BoxView BackgroundColor="White" HeightRequest="4" />
+        <BoxView BackgroundColor="White" HeightRequest="2" />
 
         <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorDownload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-            <Image x:Name="DownloadIcon" WidthRequest="72" HeightRequest="72" Source="ic_download.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Image>
-            <Button x:Name="btnDownloadFile" TextColor="Black" Text="Download Icon" Command="{Binding BarcodeScannerCommand}"></Button>
-
+            <StackLayout Orientation="Horizontal" Padding="0,0,0,32">
+                <Button x:Name="btnDownloadFile" Image="ic_download.png" Command="{Binding BarcodeScannerCommand}" WidthRequest="144" HeightRequest="144" ContentLayout="Top,0" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+                
             <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
                 <Label Text="Filename:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
                 <Label Text="{Binding DownloadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
@@ -44,7 +46,6 @@
             <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16" HorizontalOptions="FillAndExpand">
                 <ProgressBar x:Name="prgDownloadFile" Progress="0.4" HorizontalOptions="FillAndExpand"></ProgressBar>
             </StackLayout>
-
 
             <StackLayout Orientation="Horizontal" Padding="0,32,0,16" HorizontalOptions="FillAndExpand">
                 <Button x:Name="btnShare" TextColor="Black" Text="Teilen" Command="{Binding ShareCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" HorizontalOptions="FillAndExpand"></Button>

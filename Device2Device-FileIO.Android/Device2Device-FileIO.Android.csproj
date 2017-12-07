@@ -164,6 +164,12 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_upload.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_download.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_upload.png" />
+    <AndroidResource Include="Resources\drawable\qrcode.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\qrcode.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\qrcode.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\qrcode.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\qrcode.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\qrcode.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Device2Device-FileIO.Core\Device2Device-FileIO.Core.csproj">
@@ -185,9 +191,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-ldpi\ic_launcher.png" />

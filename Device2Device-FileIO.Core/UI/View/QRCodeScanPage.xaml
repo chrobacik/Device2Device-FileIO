@@ -5,8 +5,10 @@
         
         <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-            <Image x:Name="qRCodeImage" Source="ic_upload.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Image>
-
+            <StackLayout Orientation="Horizontal" Padding="0,0,0,32">
+                <Image x:Name="qRCodeImage" Source="qrcode.png" HorizontalOptions="CenterAndExpand"></Image>
+            </StackLayout>
+                
             <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
                 <Label Text="Name:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
                 <Label Text="{Binding UploadTransferFile.Name}" HorizontalOptions="FillAndExpand" />

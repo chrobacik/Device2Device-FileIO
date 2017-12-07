@@ -3,6 +3,7 @@ using Device2DeviceFileIO.iOS.Services;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
+using ZXing.Net.Mobile.Forms.iOS;
 
 namespace Device2DeviceFileIO.iOS
 {
@@ -11,8 +12,8 @@ namespace Device2DeviceFileIO.iOS
     {
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            Xamarin.Forms.Forms.Init();
-            ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+            Forms.Init();
+            Platform.Init();
 
             LoadApplication(new App());
 

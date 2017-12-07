@@ -182,11 +182,16 @@
     <ImageAsset Include="Assets.xcassets\ic_upload.imageset\ic_upload.png" />
     <ImageAsset Include="Assets.xcassets\ic_upload.imageset\ic_upload%402x.png" />
     <ImageAsset Include="Assets.xcassets\ic_upload.imageset\ic_upload%403x.png" />
+    <ImageAsset Include="Assets.xcassets\qrcode.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\qrcode.imageset\qrcode.png" />
+    <ImageAsset Include="Assets.xcassets\qrcode.imageset\qrcode%402x.png" />
+    <ImageAsset Include="Assets.xcassets\qrcode.imageset\qrcode%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Assets.xcassets\ic_download.imageset\" />
     <Folder Include="Assets.xcassets\ic_upload.imageset\" />
+    <Folder Include="Assets.xcassets\qrcode.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />

@@ -43,7 +43,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Die Kamera wird benutzt, um den QR Code zu scannen.</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.crealogix.casmobile.Device2Device.FileIO</string>
+	<string>ch.hsr.casmobile.Device2Device-FileIO</string>
 	<key>Custom Property</key>
 	<string></string>
 </dict>
