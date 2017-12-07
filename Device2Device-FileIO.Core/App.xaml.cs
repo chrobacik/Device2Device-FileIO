@@ -9,6 +9,15 @@ namespace Device2DeviceFileIO
     {
         private static ICloudFileService mFileServiceInstance;
 
+        private IShareHandler _ShareHandler;
+        public IShareHandler ShareHandler
+        {
+            get
+            {
+                return _ShareHandler ?? (_ShareHandler = DependencyService.Get<IShareHandler>());
+            }
+        }
+
         public App()
         {
             InitializeComponent();

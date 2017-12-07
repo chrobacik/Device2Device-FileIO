@@ -9,5 +9,6 @@ namespace Device2DeviceFileIO.Classes
         public String Type { get; set; }
         public byte[] Content { get; set; }
         public TransferStatus Status { get; set; }
+        public String StoragePath { get; set; }
     }
 }

@@ -3,15 +3,22 @@ using System.IO;
 using Device2DeviceFileIO.Classes;
 using Device2DeviceFileIO.Pages;
 using Xamarin.Forms;
+using Device2DeviceFileIO.Interfaces;
 
 namespace Device2DeviceFileIO
 {
     public partial class MainPage : ContentPage
     {
+        TransferFile SharedFile { get; set; }
+
+
         public MainPage()
         {
             InitializeComponent();
             Title = "Device2Device File.IO";
+
+            ((App)Application.Current).ShareHandler.ShareFileRequestReceived += ShareHandler_ShareFileRequestReceived;
+
 
             btnGoToSelectFile.Clicked += async (object sender, System.EventArgs e) =>
             {
@@ -52,11 +59,29 @@ namespace Device2DeviceFileIO
                 App.GetCloudFileService().Download(new TransferFile(), new QRCode { Url = edtDownloadLink.Text });
             };
 
+            btnShareFile.Clicked += BtnShareFile_Clicked;
+
+
             App.GetCloudFileService().DownloadFinished += Handle_DownloadFinished;
             App.GetCloudFileService().OperationProgress += Handle_OperationProgress;
             App.GetCloudFileService().OperationCanceled += Handle_OperationCanceled;
             App.GetCloudFileService().UploadFinished += Handle_UploadFinished;
             App.GetCloudFileService().OperationFailed += Handle_OperationFailed;
+        }
+
+        private void ShareHandler_ShareFileRequestReceived(object sender, EventArgs e)
+        {
+            btnShareFile.IsEnabled = true;
+
+            SharedFile = ((IShareHandler)sender).ReceiveFile();
+        }
+
+        private void BtnShareFile_Clicked(object sender, EventArgs e)
+        {
+            if (SharedFile != null)
+            {
+                ((App)Application.Current).ShareHandler.ProvideFile(SharedFile);
+            }
         }
 
         public void Handle_DownloadFinished(object sender, FileOperation.DownloadFinishedMessage e)

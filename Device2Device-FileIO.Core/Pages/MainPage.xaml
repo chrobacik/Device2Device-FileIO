@@ -11,6 +11,7 @@
             <Button x:Name="btnUploadFile" Text="Upload File"></Button>
             <Entry x:Name="edtDownloadLink" Text=""></Entry>
             <Button x:Name="btnDownloadFile" Text="Download File"></Button>
+            <Button x:Name="btnShareFile" Text="Share File" IsEnabled="False"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

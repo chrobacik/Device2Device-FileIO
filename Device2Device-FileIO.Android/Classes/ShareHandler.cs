@@ -3,15 +3,18 @@ using Android.Content;
 using Android.Provider;
 using Android.Webkit;
 using Device2DeviceFileIO.Classes;
+using Device2DeviceFileIO.Droid.Classes;
 using Device2DeviceFileIO.Interfaces;
 using System;
 
+[assembly: Xamarin.Forms.DependencyAttribute(typeof(ShareHandler))]
 namespace Device2DeviceFileIO.Droid.Classes
 {
     class ShareHandler : IShareHandler
     {
-
-        private TransferFile File { get; set; }
+        public  Activity CurrentActivity { protected get;  set; }
+        public IFileHandler FileHandler { protected get; set; }
+        private TransferFile SharedFile { get; set; }
 
         private string GetMimeTypeFromUri(Android.Net.Uri uri)
         {
@@ -25,57 +28,67 @@ namespace Device2DeviceFileIO.Droid.Classes
             return String.Empty;
         }
 
-        public void HandleIntent(Activity activity)
+        public void HandleShareIntent()
         {
-            if (activity.Intent.Action == Intent.ActionSend)
+            if (CurrentActivity.Intent.Action == Intent.ActionSend)
             {
-                File = new TransferFile();
-            
-                var fileUri = activity.Intent.GetParcelableExtra(Intent.ExtraStream) as Android.Net.Uri;
-                var subject = activity.Intent.GetStringExtra(Intent.ExtraSubject);
+                var fileUri = CurrentActivity.Intent.GetParcelableExtra(Intent.ExtraStream) as Android.Net.Uri;
 
-                
+                //if fileUri is null, it seems there is no file 
+                if (fileUri == null) return;
 
-                //get file name and type
-                var cr = activity.ContentResolver;
+                var file = new TransferFile();
+                var cr = CurrentActivity.ContentResolver;
+
+                 //get file name and type
                 string[] projection = { MediaStore.MediaColumns.DisplayName, MediaStore.MediaColumns.MimeType, MediaStore.MediaColumns.Size };
                 using (var metadataCursor = cr.Query(fileUri, projection, null, null, null))
                 {
                     if (metadataCursor?.MoveToFirst() == true)
                     {
-                        File.Name = metadataCursor.GetString(
+                        file.Name = metadataCursor.GetString(
                             Array.IndexOf(projection, MediaStore.MediaColumns.DisplayName));
-                        File.Size = metadataCursor.GetLong(
-                            Array.IndexOf(projection, MediaStore.MediaColumns.MimeType));
+                        file.Size = metadataCursor.GetLong(
+                            Array.IndexOf(projection, MediaStore.MediaColumns.Size));
 
-                        //getting type here doew not work. Column was empty when tested with jpg from browser
+                        //getting type here does not work. Column was empty when tested with jpg from browser
                         //File.Type = metadataCursor.GetString(
                         //    Array.IndexOf(projection, MediaStore.MediaColumns.MimeType));
                         //using this
-                        File.Type = GetMimeTypeFromUri(fileUri);
+                        file.Type = GetMimeTypeFromUri(fileUri);
                     }
                 }
 
-
                 //get file data
-                var firstClipDataItem = activity.Intent.ClipData.GetItemAt(0);
+                var firstClipDataItem = CurrentActivity.Intent.ClipData.GetItemAt(0);
                 var itemStream = cr.OpenInputStream(firstClipDataItem.Uri);
 
                 var localStream = new System.IO.MemoryStream();
                 itemStream.CopyTo(localStream);
 
-                File.Content = localStream.ToArray() ?? new byte[] { };
-                File.Size = File.Content.Length;
+                file.Content = localStream.ToArray() ?? new byte[] { };
+                file.Size = file.Content.Length;
 
+                FileHandler.Save(file);
+                SharedFile = file;
 
                 //Notify Observers
                 OnShareFileRequestReceived();
             }
         }
 
+        public ShareHandler() { }
 
-        public ShareHandler()
-        {        }
+        public void SetContext(Activity currentActivity, IFileHandler fileHandler)
+        {
+            this.CurrentActivity = currentActivity;
+            this.FileHandler = fileHandler;
+        }
+
+        public ShareHandler(Activity currentActivity, IFileHandler fileHandler)
+        {
+            SetContext(currentActivity, fileHandler);
+        }
 
         public event EventHandler ShareFileRequestReceived = delegate { };
 
@@ -85,35 +98,21 @@ namespace Device2DeviceFileIO.Droid.Classes
         }
 
         public void ProvideFile(TransferFile transferFile)
-        {  /*
+        {
+            FileHandler.Load(transferFile);
+
             var sendFileIntent = new Intent(Intent.ActionSend);
             sendFileIntent.SetType(transferFile.Type);
-            var uri = Android.Net.Uri.FromFile((transferFile.Content);
+            var file = new Java.IO.File(transferFile.StoragePath);
+            var uri = Android.Net.Uri.FromFile(file);
             sendFileIntent.PutExtra(Intent.ExtraStream, uri);
 
-          
-             * 
-             * 
-             * 
-             * 
-             * 
-            Intent CreateIntent()
-            {
-                var sendFileIntent = new Intent(Intent.ActionSend);
-                sendFileIntent.
-
-                sendPictureIntent.SetType("image/*");
-                var uri = Android.Net.Uri.FromFile(GetFileStreamPath("image.png"));
-                sendPictureIntent.PutExtra(Intent.ExtraStream, uri);
-                return sendPictureIntent;
-            }
-            */
-            throw new NotImplementedException();
+            CurrentActivity.StartActivity(sendFileIntent);
         }
 
         public TransferFile ReceiveFile()
         {
-            return File;
+            return SharedFile;
         }
 
     }

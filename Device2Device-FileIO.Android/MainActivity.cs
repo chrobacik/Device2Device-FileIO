@@ -38,9 +38,13 @@ namespace Device2DeviceFileIO.Droid
 
             LoadApplication(new App());
 
-            var sh = new ShareHandler();
-            sh.HandleIntent(this);
-
+            var sh = (ShareHandler)((App)App.Current).ShareHandler;
+            sh.SetContext(this, new FileHandler());
+            sh.HandleShareIntent();
+            if (Intent.Action == Intent.ActionSend)
+            {
+                var fileUri = this.Intent.GetParcelableExtra(Intent.ExtraStream) as Android.Net.Uri;
+            }
             MessagingCenter.Subscribe<FileOperation.UploadMessage>(this, FileOperation.UPLOAD, message => {
 
                 var intent = new Intent(this, typeof(FileService));
