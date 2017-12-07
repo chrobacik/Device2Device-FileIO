@@ -28,6 +28,11 @@ namespace Device2DeviceFileIO.FileIO
                 File = file;
                 Code = code;
             }
+
+            public bool IsRunning()
+            {
+                return (File != null && File.Status.State == TransferStatus.TypeState.Transfering);
+            }
         }
 
         protected TransferOperation CurrentUpload { get; set; }
@@ -104,28 +109,27 @@ namespace Device2DeviceFileIO.FileIO
         /// <param name="expiration">Exipration date for uploaded file</param>
         public void Upload(TransferFile file, DateTime expiration)
         {
-            try
+            // Check if upload is already running
+            if (CurrentUpload.IsRunning())
             {
-                if (DateTime.Now.CompareTo(expiration) != -1)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(expiration), expiration, "Expiration date must be greater than actual date.");
-                }
-
-                // Create QR code, link will be added when upload has finished
-                var qRCode = new QRCode { FileName = file.Name, ExpirationDate = expiration };
-
-                CurrentUpload = new TransferOperation(file, qRCode);
-
-                // Change file state before start upload process
-                file.Status.State = TransferStatus.TypeState.Transfering;
-                file.Status.Percentage = 0F;
-
-                MessagingCenter.Send(new FileOperation.UploadMessage(), FileOperation.UPLOAD);
+                throw new ApplicationException("An upload process is already running.");
             }
-            catch (Exception ex)
+
+            if (DateTime.Now.CompareTo(expiration) != -1)
             {
-                Debug.WriteLine("Exception: " + ex.ToString());
+                throw new ArgumentOutOfRangeException(nameof(expiration), expiration, "Expiration date must be greater than actual date.");
             }
+
+            // Create QR code, link will be added when upload has finished
+            var qRCode = new QRCode { FileName = file.Name, ExpirationDate = expiration };
+
+            CurrentUpload = new TransferOperation(file, qRCode);
+
+            // Change file state before start upload process
+            file.Status.State = TransferStatus.TypeState.Transfering;
+            file.Status.Percentage = 0F;
+
+            MessagingCenter.Send(new FileOperation.UploadMessage(), FileOperation.UPLOAD);
         }
 
         /// <summary>
@@ -151,20 +155,19 @@ namespace Device2DeviceFileIO.FileIO
         /// <param name="file">TransferFile to use for download file content</param>
         public TransferFile Download(QRCode qRCode, TransferFile file)
         {
-            try
+            // Check if upload is already running
+            if (CurrentDownload.IsRunning())
             {
-                // Change file state before start download process
-                file.Status.State = TransferStatus.TypeState.Transfering;
-                file.Status.Percentage = 0F;
-
-                CurrentDownload = new TransferOperation(file, qRCode);
-
-                MessagingCenter.Send(new FileOperation.DownloadMessage(), FileOperation.DOWNLOAD);
+                throw new ApplicationException("A download process is already running.");
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception: " + ex.ToString());
-            }
+
+            // Change file state before start download process
+            file.Status.State = TransferStatus.TypeState.Transfering;
+            file.Status.Percentage = 0F;
+
+            CurrentDownload = new TransferOperation(file, qRCode);
+
+            MessagingCenter.Send(new FileOperation.DownloadMessage(), FileOperation.DOWNLOAD);
 
             return file;
         }
