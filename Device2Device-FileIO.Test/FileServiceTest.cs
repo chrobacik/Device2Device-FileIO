@@ -11,9 +11,9 @@ namespace Device2DeviceFileIO.Test
     {
         public class FileServiceUT : FileIO.FileService
         {
-            public String _BuildUploadURL(String url)
+            public String _BuildUploadURL(QRCode qRCode)
             {
-                return this.BuildUploadURL(url);
+                return this.BuildUploadURL(qRCode);
             }
         }
         
@@ -49,7 +49,7 @@ namespace Device2DeviceFileIO.Test
             var service = new FileServiceUT();
             var expected = "https://file.io/?expires=14";
 
-            Assert.AreEqual(expected, service._BuildUploadURL("https://file.io"));
+            Assert.AreEqual(expected, service._BuildUploadURL(new QRCode()));
         }
     }
 }

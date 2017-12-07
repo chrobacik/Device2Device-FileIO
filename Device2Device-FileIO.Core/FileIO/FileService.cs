@@ -16,7 +16,7 @@ namespace Device2DeviceFileIO.FileIO
     public class FileService : ICloudFileService
     {
         private const String HOST = "https://file.io";
-        private const Int16 DEFAULT_EXPIRATION_IN_DAYS = 14;
+        private const int DEFAULT_EXPIRATION_IN_DAYS = 14;
 
         protected class TransferOperation
         {
@@ -54,11 +54,19 @@ namespace Device2DeviceFileIO.FileIO
         /// Example: https://file.io/?expires=14
         /// </summary>
         /// <returns>The upload URL to send file to</returns>
-        protected String BuildUploadURL(String url)
+        protected String BuildUploadURL(QRCode qRCode)
         {
-            var builder = new UriBuilder(url)
+            int days = (qRCode.ExpirationDate - DateTime.Now).Days;
+
+            // Use default expiration when days are negativ
+            if (days < 0)
+            {
+                days = DEFAULT_EXPIRATION_IN_DAYS;
+            }
+            
+            var builder = new UriBuilder(HOST)
             { 
-                Query = $"expires={DEFAULT_EXPIRATION_IN_DAYS.ToString()}",
+                Query = $"expires={days.ToString()}",
                 Port = -1 // This will remove any port number
             };
 
@@ -204,7 +212,7 @@ namespace Device2DeviceFileIO.FileIO
                 dataContent.Add(streamContent, "file", CurrentUpload.File.Name);
 
                 // Upload MultipartFormDataContent content async and store response in response var
-                var response = await client.PostAsync(BuildUploadURL(HOST), dataContent, cancellation.Token);
+                var response = await client.PostAsync(BuildUploadURL(CurrentUpload.Code), dataContent, cancellation.Token);
 
                 // Ensure reponse status code is 200, else throw an HttpRequestException
                 response.EnsureSuccessStatusCode();
