@@ -1,6 +1,6 @@
 ﻿using Device2DeviceFileIO.Classes;
 using Device2DeviceFileIO.Interfaces;
-using Device2DeviceFileIO.Pages;
+using Device2DeviceFileIO.UI.View;
 using Xamarin.Forms;
 
 namespace Device2DeviceFileIO
@@ -22,7 +22,7 @@ namespace Device2DeviceFileIO
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new TransferFileOverviewPage());
         }
 
         protected override void OnStart()
@@ -44,7 +44,7 @@ namespace Device2DeviceFileIO
         {
             if (mFileServiceInstance == null)
             {
-                mFileServiceInstance = new FileIOFileService();
+                mFileServiceInstance = new FileIO.FileService(new PlaceboFileCryptor());
             }
 
             return mFileServiceInstance;

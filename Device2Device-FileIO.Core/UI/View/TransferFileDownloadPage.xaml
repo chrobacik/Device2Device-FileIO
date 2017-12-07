@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.UI.View.TransferFileDownloadPage">
+    
+    <StackLayout Spacing="0" Padding="0">
+
+        <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorDownload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
+                <Label Text="Name:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
+                <Label Text="{Binding DownloadTransferFile.Name}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+            
+            <BoxView HeightRequest="8" />
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
+                <Label Text="Grösse:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
+                <Label Text="{Binding DownloadTransferFile.Size}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <BoxView HeightRequest="8" />
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
+                <Label Text="Type:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
+                <Label Text="{Binding DownloadTransferFile.Type}" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <BoxView HeightRequest="8" />
+
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="16">
+                <Label Text="Ablaufdatum:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="112" />
+                <DatePicker VerticalOptions="CenterAndExpand">
+                    <DatePicker.Format>dd.MM.yyyy</DatePicker.Format>
+                    <!--DatePicker.MinimumDate>
+                        <sys:DateTime x:FactoryMethod="Parse">
+                           <x:Arguments>
+                              <x:String>Jan 1 2000</x:String>
+                           </x:Arguments>
+                        </sys:DateTime>
+                    </DatePicker.MinimumDate>
+                     <DatePicker.MaximumDate>
+                        <sys:DateTime x:FactoryMethod="Parse">
+                           <x:Arguments>
+                              <x:String>Dec 31 2050</x:String>
+                           </x:Arguments>
+                        </sys:DateTime>
+                     </DatePicker.MaximumDate -->
+              </DatePicker>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Padding="0,32,0,16" HorizontalOptions="FillAndExpand">
+                <Button x:Name="btnReadyToReceive" TextColor="Black" Text="Empfangen" Command="{Binding StartDownloadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+
+        </StackLayout>
+
+    </StackLayout>
+    
+</ContentPage>

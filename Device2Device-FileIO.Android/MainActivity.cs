@@ -1,25 +1,19 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using System.Threading.Tasks;
 using Android.Provider;
-using Android.Net;
 using Xamarin.Forms;
 using Device2DeviceFileIO.Classes;
 using Device2DeviceFileIO.Droid.Services;
-using Android;
 using Device2DeviceFileIO.Droid.Classes;
 
 namespace Device2DeviceFileIO.Droid
 {
     [IntentFilter(new[] { Intent.ActionSend }, Categories = new[] { Intent.CategoryDefault }, DataMimeType = @"*/*")]
-    [Activity(Label = "Device2Device-FileIO.Android", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Device2Device-FileIO.Android", Icon = "@drawable/ic_launcher", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static readonly int PickImageId = 1000;
@@ -41,27 +35,16 @@ namespace Device2DeviceFileIO.Droid
             var sh = (ShareHandler)((App)App.Current).ShareHandler;
             sh.SetContext(this, new FileHandler());
             sh.HandleShareIntent();
-            if (Intent.Action == Intent.ActionSend)
-            {
-                var fileUri = this.Intent.GetParcelableExtra(Intent.ExtraStream) as Android.Net.Uri;
-            }
+
+
             MessagingCenter.Subscribe<FileOperation.UploadMessage>(this, FileOperation.UPLOAD, message => {
 
-                var intent = new Intent(this, typeof(FileService));
-                intent.PutExtra("operation", FileOperation.UPLOAD);
-                intent.PutExtra("file", message.FileName);
-                intent.PutExtra("content", message.Content);
-
-                StartService(intent);
+                StartService(new Intent(this, typeof(FileUploadService)));
             });
 
             MessagingCenter.Subscribe<FileOperation.DownloadMessage>(this, FileOperation.DOWNLOAD, message => {
 
-                var intent = new Intent(this, typeof(FileService));
-                intent.PutExtra("operation", FileOperation.DOWNLOAD);
-                intent.PutExtra("link", message.Link);
-
-                StartService(intent);
+                StartService(new Intent(this, typeof(FileDownloadService)));
             });
         }
 
