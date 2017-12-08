@@ -14,7 +14,7 @@ namespace Device2DeviceFileIO.UI.View
         {
             InitializeComponent();
 
-            Title = "Scan";
+            Title = "QR-Code zum Scannen";
 
             ViewModel = new QRCodeScanVm(uploadTransferFile, qRCode);
             ViewModel.Navigation = Navigation;

@@ -14,7 +14,7 @@ namespace Device2DeviceFileIO.UI.View
         {
             InitializeComponent();
 
-            Title = "Upload";
+            Title = "Datei hochladen";
 
             ViewModel = new TransferFileUploadVm(uploadTransferFile, qRCode);
             ViewModel.Navigation = Navigation;

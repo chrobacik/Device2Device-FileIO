@@ -7,25 +7,43 @@
             <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                  
                 <StackLayout Orientation="Horizontal" Padding="0,0,0,32">
-                    <Button x:Name="btnUploadFile" Image="ic_upload.png" Command="{Binding TransferFileUploadCommand}" WidthRequest="144" HeightRequest="144" ContentLayout="Top,0" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand" />
+                    <Image x:Name="btnUploadFile" Source="ic_upload.png" WidthRequest="144" HeightRequest="144" HorizontalOptions="CenterAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TransferFileUploadCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
 
                 <StackLayout Spacing="0">
                     <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
-                        <Label Text="Filename" Style="{StaticResource labelTabTitle}" />
+                        <Label Text="Name" Style="{StaticResource labelTabTitle}" />
                     </StackLayout>
                     <StackLayout Padding="8" BackgroundColor="#606060">
                         <StackLayout Padding="4" BackgroundColor="#494949">
                             <Label Text="{Binding UploadTransferFile.Name}" Style="{StaticResource labelTabContent}" />
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource backgroundColorTabTitle}" Padding="4" HorizontalOptions="FillAndExpand">
+                    </StackLayout>
+                </StackLayout>
+
+                <BoxView HeightRequest="8" />
+
+                <StackLayout Spacing="0">
+                    <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                        <Label Text="Status" Style="{StaticResource labelTabTitle}" />
+                    </StackLayout>
+                    <StackLayout Padding="8" BackgroundColor="#606060">
+                        <StackLayout Padding="4" BackgroundColor="#494949">
+                            <Label Text="{Binding UploadTransferFile.Status.State}" Style="{StaticResource labelTabContent}" />
+                        </StackLayout>
+                        <StackLayout IsVisible="{Binding IsPrgUploadFileVisible}" Orientation="Horizontal" BackgroundColor="{StaticResource backgroundColorTabTitle}" Padding="4" HorizontalOptions="FillAndExpand">
+                            <!-- Change Colors https://forums.xamarin.com/discussion/81194/how-can-we-change-color-of-progressbar -->
                             <ProgressBar x:Name="prgUploadFile" Progress="0.0" HorizontalOptions="FillAndExpand"></ProgressBar>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Padding="0,32,0,0" HorizontalOptions="FillAndExpand">
-                    <Button x:Name="btnReadyToReceive" Text="Bereit zum empfangen" Command="{Binding ReadyToReceiveCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
+                    <Button x:Name="btnReadyToReceive" Text="Bereit zum empfangen" Command="{Binding ReadyToReceiveCommand}" IsEnabled="{Binding IsBtnReadyToReceiveEnabled}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
                 </StackLayout>
                     
             </StackLayout>
@@ -35,27 +53,43 @@
             <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorDownload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
                 <StackLayout Orientation="Horizontal" Padding="0,0,0,32">
-                    <Button x:Name="btnDownloadFile" Image="ic_download.png" Command="{Binding BarcodeScannerCommand}" WidthRequest="144" HeightRequest="144" ContentLayout="Top,0" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand" />
+                    <Image x:Name="btnDownloadFile" Source="ic_download.png" WidthRequest="144" HeightRequest="144" HorizontalOptions="CenterAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BarcodeScannerCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
 
                 <StackLayout Spacing="0">
                     <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
-                        <Label Text="Filename" Style="{StaticResource labelTabTitle}" />
+                        <Label Text="Name" Style="{StaticResource labelTabTitle}" />
                     </StackLayout>
                     <StackLayout Padding="8" BackgroundColor="#606060">
                         <StackLayout Padding="4" BackgroundColor="#494949">
                             <Label Text="{Binding DownloadTransferFile.Name}" Style="{StaticResource labelTabContent}" />
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource backgroundColorTabTitle}" Padding="4" HorizontalOptions="FillAndExpand">
+                    </StackLayout>
+                </StackLayout>
+
+                <BoxView HeightRequest="8" />
+
+                <StackLayout Spacing="0">
+                    <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                        <Label Text="Status" Style="{StaticResource labelTabTitle}" />
+                    </StackLayout>
+                    <StackLayout Padding="8" BackgroundColor="#606060">
+                        <StackLayout Padding="4" BackgroundColor="#494949">
+                            <Label Text="{Binding DownloadTransferFile.Status.State}" Style="{StaticResource labelTabContent}" />
+                        </StackLayout>
+                        <StackLayout IsVisible="{Binding IsPrgDownloadFileVisible}" Orientation="Horizontal" BackgroundColor="{StaticResource backgroundColorTabTitle}" Padding="4" HorizontalOptions="FillAndExpand">
+                            <!-- Change Colors https://forums.xamarin.com/discussion/81194/how-can-we-change-color-of-progressbar -->
                             <ProgressBar x:Name="prgDownloadFile" Progress="0.0" HorizontalOptions="FillAndExpand"></ProgressBar>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Padding="0,32,0,16" HorizontalOptions="FillAndExpand">
-                    <!-- IsEnabled="{(DownloadTransferFile) ? true : false}" -->
-                    <!-- <Button Command="{Binding StartCommand}" IsEnabled="{Binding StartEnabled}" /> -->
-                    <Button x:Name="btnShare" Text="Teilen" Command="{Binding ShareCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
+                    <Button x:Name="btnShare" Text="Teilen" Command="{Binding ShareCommand}" IsEnabled="{Binding IsBtnShareEnabled}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
                 </StackLayout>
 
             </StackLayout>
