@@ -89,7 +89,7 @@ namespace Device2DeviceFileIO.iOS.Classes
         public TransferFile ReceiveFile()
         {
 
-            throw new NotImplementedException();
+            return SharedFile;
         }
 
         UIViewController GetPresentedViewController()
