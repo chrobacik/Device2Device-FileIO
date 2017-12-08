@@ -18,7 +18,7 @@ namespace Device2DeviceFileIO.UI.View
             Title = "QR-Code zum Scannen";
 
             //ViewModel = new QRCodeScanVm(uploadTransferFile, qRCode);
-            ViewModel = new QRCodeScanVm(App.GetCloudFileService().CurrentUpload.File, App.GetCloudFileService().CurrentUpload.Code);
+            ViewModel = new QRCodeScanVm(App.CurrentUploadFile, App.CurrentUploadQRCode);
             ViewModel.Navigation = Navigation;
 
             BindingContext = ViewModel;

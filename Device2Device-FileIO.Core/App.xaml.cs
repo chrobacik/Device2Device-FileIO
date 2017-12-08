@@ -24,8 +24,11 @@ namespace Device2DeviceFileIO
             InitializeComponent();
 
             MainPage = new NavigationPage(new TransferFileOverviewPage()) {
-                BarBackgroundColor = Color.FromHex("#2ebced"), BarTextColor = Color.White
+                BarBackgroundColor = Color.FromHex("#2ebced"),
+                BarTextColor = Color.White
             };
+
+            App.GetCloudFileService();
         }
 
         protected override void OnStart()
@@ -43,6 +46,26 @@ namespace Device2DeviceFileIO
             // Handle when your app resumes
         }
 
+        public static TransferFile CurrentUploadFile
+        {
+            get => App.GetCloudFileService().CurrentUpload.File;
+        }
+
+        public static TransferFile CurrentDownloadFile
+        {
+            get => App.GetCloudFileService().CurrentDownload.File;
+        }
+
+        public static QRCode CurrentUploadQRCode
+        {
+            get => App.GetCloudFileService().CurrentUpload.Code;
+        }
+
+        public static QRCode CurrentDownloadQRCode
+        {
+            get => App.GetCloudFileService().CurrentDownload.Code;
+        }
+
         public static ICloudFileService GetCloudFileService()
         {
             if (mFileServiceInstance == null)
@@ -55,8 +78,7 @@ namespace Device2DeviceFileIO
 
         public static bool HasConnectivity()
         {
-            if (!CrossConnectivity.IsSupported)
-                return true;
+            if (!CrossConnectivity.IsSupported) return true;
 
             //Do this only if you need to and aren't listening to any other events as they will not fire.
             var connectivity = CrossConnectivity.Current;

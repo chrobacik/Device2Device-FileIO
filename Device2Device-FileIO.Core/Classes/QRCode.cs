@@ -35,7 +35,7 @@ namespace Device2DeviceFileIO.Classes
 
         public String GetData()
         {
-            var builder = new UriBuilder(Url)
+            var builder = new UriBuilder(Url ?? "http://localhost")
             {
                 Port = -1 // This will remove any port number
             };
