@@ -8,7 +8,6 @@ namespace Device2DeviceFileIO.UI.ViewModel
 {
     public class QRCodeScanVm : BindableBase
     {
-
         public QRCodeScanVm(TransferFile uploadTransferFile, QRCode qRCode)
         {
             UploadTransferFile = uploadTransferFile;

@@ -14,7 +14,7 @@ namespace Device2DeviceFileIO
         {
             InitializeComponent();
             Title = "Show Barcode";
-            BackgroundColor = Color.White;
+            //BackgroundColor = Color.White;
 
             mBarcode = new ZXingBarcodeImageView
             {

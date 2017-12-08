@@ -3,19 +3,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Device2DeviceFileIO.UI.View.QRCodeScanPage"
     xmlns:zx="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
-             xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable">
+    xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable"
+    BackgroundColor="{StaticResource backgroundColorUpload}">
 
     <ScrollView>
         <StackLayout Spacing="0" Padding="0">
             
             <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-                <StackLayout Orientation="Horizontal" Padding="0,0,0,32">
-                    <zx:ZXingBarcodeImageView BarcodeValue="{Binding QRCode.Url}" BarcodeFormat="QR_CODE" 
-                                              HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-                                              >
+                <StackLayout x:Name="ZxImageView" Orientation="Horizontal" Padding="0,0,0,32">
+                    <zx:ZXingBarcodeImageView BarcodeValue="{Binding }"
+                        BarcodeFormat="QR_CODE" HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" BackgroundColor="Transparent"
+                        AutomationId="ZxingBarcodeImageView">
                         <zx:ZXingBarcodeImageView.BarcodeOptions>
-                            <zxcm:EncodingOptions  Height="144" Width="144"/>
+                            <zxcm:EncodingOptions Height="300" Width="300" Margin="10"/>
                         </zx:ZXingBarcodeImageView.BarcodeOptions>
                     </zx:ZXingBarcodeImageView>
                 </StackLayout>

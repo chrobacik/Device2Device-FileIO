@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using Device2DeviceFileIO.Classes;
+using static Device2DeviceFileIO.FileIO.FileService;
 
 namespace Device2DeviceFileIO.Interfaces
 {
@@ -14,6 +15,9 @@ namespace Device2DeviceFileIO.Interfaces
         void Upload(TransferFile file, DateTime expiration);
         TransferFile Download(QRCode qRCode);
         TransferFile Download(QRCode qRCode, TransferFile file);
+
+        TransferOperation CurrentUpload { get; }
+        TransferOperation CurrentDownload { get; }
 
         void CancelUpload();
         void CancelDownload();

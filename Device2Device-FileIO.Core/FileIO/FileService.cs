@@ -18,7 +18,7 @@ namespace Device2DeviceFileIO.FileIO
         private const String HOST = "https://file.io";
         private const int DEFAULT_EXPIRATION_IN_DAYS = 14;
 
-        protected class TransferOperation
+        public class TransferOperation
         {
             public TransferFile File { get; set; }
             public QRCode Code { get; set; }
@@ -35,8 +35,8 @@ namespace Device2DeviceFileIO.FileIO
             }
         }
 
-        protected TransferOperation CurrentUpload { get; set; }
-        protected TransferOperation CurrentDownload { get; set; }
+        public TransferOperation CurrentUpload { get; protected set; }
+        public TransferOperation CurrentDownload { get; protected set; }
         protected IFileCryptor FileCryptor { get; set; }
 
         public event EventHandler<FileOperation.UploadFinishedEventArgs> UploadFinished;
@@ -50,6 +50,8 @@ namespace Device2DeviceFileIO.FileIO
 
         public FileService(IFileCryptor cryptor)
         {
+            CurrentUpload = new TransferOperation(new TransferFile(), new QRCode());
+            CurrentDownload = new TransferOperation(new TransferFile(), new QRCode());
             FileCryptor = cryptor;
         }
 
