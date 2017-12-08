@@ -51,5 +51,40 @@ namespace Device2DeviceFileIO.Test
 
             Assert.AreEqual(expected, service._BuildUploadURL(new QRCode()));
         }
+        /*
+        [Test]
+        public async Task UpDownloadTest()
+        {
+            var path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var file = Path.Combine(path, "TestData\\earth_large.jpg");
+
+            var service = new FileServiceUT();
+
+            FileOperation.UploadFinishedEventArgs args = null;
+            service.UploadFinished += (o, a) => args = a;
+
+            service.DownloadProgress += (o, a) => Console.WriteLine($"Download: {a.File.Status.Percentage*100:0}%");
+            service.UploadProgress += (o, a) => Console.WriteLine($"Upload: {a.File.Status.Percentage*100:0}%");
+
+            var tf = new TransferFile()
+            {
+                Name = Path.GetFileName(file),
+                Content = File.ReadAllBytes(file)
+            };
+            var token = new CancellationTokenSource();
+            service.Upload(tf);
+            await service.UploadFileAsync(token);
+            Console.WriteLine("Upload done.");
+
+            Console.WriteLine($"Got dl-url: {args.Code.Url}");
+
+            service.Download(args.Code);
+            await service.DownloadFileAsync(token);
+            Console.WriteLine("Download done.");
+
+
+            var url = new QRCode();
+        }
+        */
     }
 }
