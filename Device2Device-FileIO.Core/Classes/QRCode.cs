@@ -4,7 +4,6 @@ using System.Web;
 using Device2DeviceFileIO.UI.ViewModel;
 using Xamarin.Forms;
 using ZXing.Rendering;
-using Android.Graphics;
 
 namespace Device2DeviceFileIO.Classes
 {
