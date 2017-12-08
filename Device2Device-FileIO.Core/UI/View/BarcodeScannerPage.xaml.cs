@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
 using Device2DeviceFileIO.UI.ViewModel;
+using Device2DeviceFileIO.Classes;
 
 namespace Device2DeviceFileIO.UI.View
 {	
@@ -9,13 +10,13 @@ namespace Device2DeviceFileIO.UI.View
     {
         public BarcodeScannerVm ViewModel { get; set; }
 
-        public BarcodeScannerPage()
+        public BarcodeScannerPage(TransferFile downloadTransferFile)
         {
             InitializeComponent();
 
             Title = "Scanner";
 
-            ViewModel = new BarcodeScannerVm();
+            ViewModel = new BarcodeScannerVm(downloadTransferFile);
             ViewModel.Navigation = Navigation;
 
             BindingContext = ViewModel;

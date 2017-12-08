@@ -11,6 +11,7 @@
     <None Remove="Device2Device-FileIOPage.xaml" />
     <None Remove="Pages\Device2Device-FileIOPage.xaml" />
     <None Remove="Resources\MyFile.txt" />
+    <None Remove="Resources\EarthLarge.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UI\View\MyPage.xaml.cs" />
@@ -46,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MyFile.txt" />
+    <EmbeddedResource Include="Resources\EarthLarge.jpg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="NETStandard.Library" Version="2.0.1" />

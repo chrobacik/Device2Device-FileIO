@@ -46,11 +46,24 @@
 
             <StackLayout Spacing="0">
                 <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                    <Label Text="Status" Style="{StaticResource labelTabTitle}" />
+                </StackLayout>
+                <StackLayout Padding="8" BackgroundColor="#606060">
+                    <StackLayout Padding="4" BackgroundColor="#494949">
+                        <Label Text="{Binding UploadTransferFile.Status.State}" Style="{StaticResource labelTabContent}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <BoxView HeightRequest="8" />
+
+            <StackLayout Spacing="0">
+                <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
                     <Label Text="Ablaufdatum" Style="{StaticResource labelTabTitle}" />
                 </StackLayout>
                 <StackLayout Padding="8" BackgroundColor="#606060">
                     <StackLayout Padding="4" BackgroundColor="#494949">
-                        <DatePicker Style="{StaticResource datePicker}">
+                        <DatePicker Style="{StaticResource datePicker}" Date="{Binding ExpirationDate}">
                             <DatePicker.Format>dd.MM.yyyy</DatePicker.Format>
                             <!--DatePicker.MinimumDate>
                                 <sys:DateTime x:FactoryMethod="Parse">

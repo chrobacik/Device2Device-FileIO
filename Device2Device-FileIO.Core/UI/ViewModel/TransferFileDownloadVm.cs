@@ -24,6 +24,8 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         async public void StartDownload()
         {
+            // App.GetCloudFileService().Download(new QRCode { Url = edtDownloadLink.Text });
+
             await Navigation.PopToRootAsync();
         }
 

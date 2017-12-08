@@ -1,8 +1,9 @@
 ﻿using System;
+using Device2DeviceFileIO.UI.ViewModel;
 
 namespace Device2DeviceFileIO.Classes
 {
-    public class TransferStatus
+    public class TransferStatus : BindableBase
     {
         public enum TypeState
         {
@@ -14,8 +15,19 @@ namespace Device2DeviceFileIO.Classes
             Failed
         };
 
-        public TypeState State { get; set; }
-        public float Percentage { get; set; }
+        private TypeState _state;
+        public TypeState State
+        {
+            get { return _state; }
+            set { SetProperty(ref _state, value); }
+        }
+
+        private float _percentage;
+        public float Percentage
+        {
+            get { return _percentage; }
+            set { SetProperty(ref _percentage, value); }
+        }
         public String ErrorMessage { get; set; }
         public Exception Exception { get; set; }
 

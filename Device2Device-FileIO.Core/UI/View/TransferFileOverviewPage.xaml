@@ -19,7 +19,7 @@
                             <Label Text="{Binding UploadTransferFile.Name}" Style="{StaticResource labelTabContent}" />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource backgroundColorTabTitle}" Padding="4" HorizontalOptions="FillAndExpand">
-                            <ProgressBar x:Name="prgUploadFile" Progress="0.4" HorizontalOptions="FillAndExpand"></ProgressBar>
+                            <ProgressBar x:Name="prgUploadFile" Progress="0.0" HorizontalOptions="FillAndExpand"></ProgressBar>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
@@ -47,7 +47,7 @@
                             <Label Text="{Binding DownloadTransferFile.Name}" Style="{StaticResource labelTabContent}" />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource backgroundColorTabTitle}" Padding="4" HorizontalOptions="FillAndExpand">
-                            <ProgressBar x:Name="prgDownloadFile" Progress="0.4" HorizontalOptions="FillAndExpand"></ProgressBar>
+                            <ProgressBar x:Name="prgDownloadFile" Progress="0.0" HorizontalOptions="FillAndExpand"></ProgressBar>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>

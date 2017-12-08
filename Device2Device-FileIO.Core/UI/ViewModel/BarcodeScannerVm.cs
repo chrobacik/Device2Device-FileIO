@@ -8,10 +8,21 @@ namespace Device2DeviceFileIO.UI.ViewModel
 {
     public class BarcodeScannerVm : BindableBase
     {
+        
+        public BarcodeScannerVm(TransferFile downloadTransferFile)
+        {
+            DownloadTransferFile = downloadTransferFile;
+        }
 
         public INavigation Navigation { get; set; }
-
         public ZXing.Result Result { get; set; }
+
+        private TransferFile _downloadTransferFile;
+        public TransferFile DownloadTransferFile
+        {
+            get { return _downloadTransferFile; }
+            set { SetProperty(ref _downloadTransferFile, value); }
+        }
 
         private bool _isAnalyzing = true;
         public bool IsAnalyzing

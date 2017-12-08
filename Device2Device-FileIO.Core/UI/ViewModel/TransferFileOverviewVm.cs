@@ -2,13 +2,32 @@
 using Device2DeviceFileIO.Classes;
 using Xamarin.Forms;
 using Device2DeviceFileIO.UI.View;
+using Device2DeviceFileIO.Interfaces;
 
 namespace Device2DeviceFileIO.UI.ViewModel
 {
     public class TransferFileOverviewVm : BindableBase
     {
 
+        public TransferFileOverviewVm() {
+            
+        }
+
         public INavigation Navigation { get; set; }
+
+        private ProgressBar _progressUploadFile;
+        public ProgressBar ProgressUploadFile
+        {
+            get { return _progressUploadFile; }
+            set { SetProperty(ref _progressUploadFile, value); }
+        }
+
+        private ProgressBar _progressDownloadFile;
+        public ProgressBar ProgressDownloadFile
+        {
+            get { return _progressDownloadFile; }
+            set { SetProperty(ref _progressDownloadFile, value); }
+        }
 
         private TransferFile _uploadTransferFile;
         public TransferFile UploadTransferFile
@@ -30,7 +49,7 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         async public void TransferFileUpload()
         {
-            await Navigation.PushAsync(new TransferFileUploadPage());
+            await Navigation.PushAsync(new TransferFileUploadPage(UploadTransferFile));
         }
 
         // lazy instantiation
@@ -48,7 +67,7 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         async public void BarcodeScanner()
         {
-            await Navigation.PushAsync(new BarcodeScannerPage());
+            await Navigation.PushAsync(new BarcodeScannerPage(DownloadTransferFile));
         }
 
         // lazy instantiation
