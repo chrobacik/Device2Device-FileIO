@@ -12,12 +12,22 @@ namespace Device2DeviceFileIO.UI.ViewModel
     {
         const double _defaultxpirationInDay = 1;
 
-        public TransferFileUploadVm(TransferFile uploadTransferFile) {
+        public TransferFileUploadVm(TransferFile uploadTransferFile, QRCode qRCode) {
             UploadTransferFile = uploadTransferFile;
+            QRCode = qRCode;
             _expirationDate = DateTime.Now.AddDays(_defaultxpirationInDay);
 
-            ((App)Application.Current).ShareHandler.ShareFileRequestReceived += (object sender, System.EventArgs e) => {
-                UploadTransferFile = ((IShareHandler)sender).ReceiveFile();
+            App.GetCloudFileService().UploadFinished += (object sender, FileOperation.UploadFinishedEventArgs e) => {
+                // Fehlerhandling, wenn File-Status Failed
+                UploadTransferFile = e.File;
+
+                QRCode = new QRCode();
+                QRCode.Url = e.Code.Url;
+
+                e.Code.CreateImage(144, 144, 0);
+                QRCode.BarCode = e.Code.BarCode;
+
+                // QRCode.CreateImage(144, 144, 0);
             };
         }
 
@@ -28,6 +38,13 @@ namespace Device2DeviceFileIO.UI.ViewModel
         {
             get { return _uploadTransferFile; }
             set { SetProperty(ref _uploadTransferFile, value); }
+        }
+
+        private QRCode _qRCode;
+        public QRCode QRCode
+        {
+            get { return _qRCode; }
+            set { SetProperty(ref _qRCode, value); }
         }
 
         private DateTime _expirationDate;
@@ -43,21 +60,8 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         async public void StartUpload()
         {
-            // Nur zum Testen
-            // var stream = this.GetType().Assembly.GetManifestResourceStream("Device2DeviceFileIO.Resources.EarthLarge.jpg");
-
-            // var ms = new MemoryStream();
-            // stream.CopyTo(ms);
-            //UploadTransferFile.Content = ms.ToArray();
-
-            App.GetCloudFileService().UploadFinished += (object sender, FileOperation.UploadFinishedEventArgs e) => {
-                // edtDownloadLink.Text = e.Code.Url;
-                // Console.Write("Finished ...");
-                // UploadTransferFile.Name = "meine_bild.png";
-            };
-
             App.GetCloudFileService().Upload(UploadTransferFile);
-            await Navigation.PopAsync();
+            // await Navigation.PopAsync();
         }
     }
 }

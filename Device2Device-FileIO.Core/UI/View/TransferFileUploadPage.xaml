@@ -1,96 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.UI.View.TransferFileUploadPage">
 
-    <StackLayout Spacing="0" Padding="0">
+    <ScrollView>
+        <StackLayout Spacing="0" Padding="0">
 
-        <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-            <StackLayout Spacing="0">
-                <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
-                    <Label Text="Name" Style="{StaticResource labelTabTitle}" />
+                <StackLayout Orientation="Horizontal" Padding="0,0,0,32">
+                    <Image x:Name="qRCodeImage" Source="{Binding QRCode.BarCode}" WidthRequest="144" HeightRequest="144" HorizontalOptions="CenterAndExpand"></Image>
                 </StackLayout>
-                <StackLayout Padding="8" BackgroundColor="#606060">
-                    <StackLayout Padding="4" BackgroundColor="#494949">
-                        <Label Text="{Binding UploadTransferFile.Name}" Style="{StaticResource labelTabContent}" />
+                
+                <StackLayout Spacing="0">
+                    <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                        <Label Text="Name" Style="{StaticResource labelTabTitle}" />
+                    </StackLayout>
+                    <StackLayout Padding="8" BackgroundColor="#606060">
+                        <StackLayout Padding="4" BackgroundColor="#494949">
+                            <Label Text="{Binding UploadTransferFile.Name}" Style="{StaticResource labelTabContent}" />
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
 
-            <BoxView HeightRequest="8" />
+                <BoxView HeightRequest="8" />
 
-            <StackLayout Spacing="0">
-                <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
-                    <Label Text="Grösse" Style="{StaticResource labelTabTitle}" />
-                </StackLayout>
-                <StackLayout Padding="8" BackgroundColor="#606060">
-                    <StackLayout Padding="4" BackgroundColor="#494949">
-                        <Label Text="{Binding UploadTransferFile.Size}" Style="{StaticResource labelTabContent}" />
+                <StackLayout Spacing="0">
+                    <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                        <Label Text="Grösse" Style="{StaticResource labelTabTitle}" />
+                    </StackLayout>
+                    <StackLayout Padding="8" BackgroundColor="#606060">
+                        <StackLayout Padding="4" BackgroundColor="#494949">
+                            <Label Text="{Binding UploadTransferFile.Size}" Style="{StaticResource labelTabContent}" />
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
 
-            <BoxView HeightRequest="8" />
+                <BoxView HeightRequest="8" />
 
-            <StackLayout Spacing="0">
-                <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
-                    <Label Text="Type" Style="{StaticResource labelTabTitle}" />
-                </StackLayout>
-                <StackLayout Padding="8" BackgroundColor="#606060">
-                    <StackLayout Padding="4" BackgroundColor="#494949">
-                        <Label Text="{Binding UploadTransferFile.Type}" Style="{StaticResource labelTabContent}" />
+                <StackLayout Spacing="0">
+                    <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                        <Label Text="Type" Style="{StaticResource labelTabTitle}" />
+                    </StackLayout>
+                    <StackLayout Padding="8" BackgroundColor="#606060">
+                        <StackLayout Padding="4" BackgroundColor="#494949">
+                            <Label Text="{Binding UploadTransferFile.Type}" Style="{StaticResource labelTabContent}" />
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
 
-            <BoxView HeightRequest="8" />
+                <BoxView HeightRequest="8" />
 
-            <StackLayout Spacing="0">
-                <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
-                    <Label Text="Status" Style="{StaticResource labelTabTitle}" />
-                </StackLayout>
-                <StackLayout Padding="8" BackgroundColor="#606060">
-                    <StackLayout Padding="4" BackgroundColor="#494949">
-                        <Label Text="{Binding UploadTransferFile.Status.State}" Style="{StaticResource labelTabContent}" />
+                <StackLayout Spacing="0">
+                    <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                        <Label Text="Status" Style="{StaticResource labelTabTitle}" />
+                    </StackLayout>
+                    <StackLayout Padding="8" BackgroundColor="#606060">
+                        <StackLayout Padding="4" BackgroundColor="#494949">
+                            <Label Text="{Binding UploadTransferFile.Status.State}" Style="{StaticResource labelTabContent}" />
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
 
-            <BoxView HeightRequest="8" />
+                <BoxView HeightRequest="8" />
 
-            <StackLayout Spacing="0">
-                <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
-                    <Label Text="Ablaufdatum" Style="{StaticResource labelTabTitle}" />
-                </StackLayout>
-                <StackLayout Padding="8" BackgroundColor="#606060">
-                    <StackLayout Padding="4" BackgroundColor="#494949">
-                        <DatePicker Style="{StaticResource datePicker}" Date="{Binding ExpirationDate}">
-                            <DatePicker.Format>dd.MM.yyyy</DatePicker.Format>
-                            <!--DatePicker.MinimumDate>
-                                <sys:DateTime x:FactoryMethod="Parse">
-                                   <x:Arguments>
-                                      <x:String>Jan 1 2000</x:String>
-                                   </x:Arguments>
-                                </sys:DateTime>
-                            </DatePicker.MinimumDate>
-                             <DatePicker.MaximumDate>
-                                <sys:DateTime x:FactoryMethod="Parse">
-                                   <x:Arguments>
-                                      <x:String>Dec 31 2050</x:String>
-                                   </x:Arguments>
-                                </sys:DateTime>
-                             </DatePicker.MaximumDate -->
-                        </DatePicker>
+                <StackLayout Spacing="0">
+                    <StackLayout Padding="8,4" HorizontalOptions="Start" BackgroundColor="#606060">
+                        <Label Text="Ablaufdatum" Style="{StaticResource labelTabTitle}" />
+                    </StackLayout>
+                    <StackLayout Padding="8" BackgroundColor="#606060">
+                        <StackLayout Padding="4" BackgroundColor="#494949">
+                            <DatePicker Style="{StaticResource datePicker}" Date="{Binding ExpirationDate}">
+                                <DatePicker.Format>dd.MM.yyyy</DatePicker.Format>
+                                <!--DatePicker.MinimumDate>
+                                    <sys:DateTime x:FactoryMethod="Parse">
+                                       <x:Arguments>
+                                          <x:String>Jan 1 2000</x:String>
+                                       </x:Arguments>
+                                    </sys:DateTime>
+                                </DatePicker.MinimumDate>
+                                 <DatePicker.MaximumDate>
+                                    <sys:DateTime x:FactoryMethod="Parse">
+                                       <x:Arguments>
+                                          <x:String>Dec 31 2050</x:String>
+                                       </x:Arguments>
+                                    </sys:DateTime>
+                                 </DatePicker.MaximumDate -->
+                            </DatePicker>
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
+
+                <!-- TODO: Bottom -->
+                <StackLayout Orientation="Horizontal" Padding="0,32,0,16" HorizontalOptions="FillAndExpand">
+                    <Button x:Name="btnSend" Text="Senden" Command="{Binding StartUploadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
+                </StackLayout>
+                      
             </StackLayout>
 
-            <!-- TODO: Bottom -->
-            <StackLayout Orientation="Horizontal" Padding="0,32,0,16" HorizontalOptions="FillAndExpand">
-                <Button x:Name="btnSend" Text="Senden" Command="{Binding StartUploadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
-            </StackLayout>
-                  
         </StackLayout>
 
-    </StackLayout>
+    </ScrollView>
 
 </ContentPage>

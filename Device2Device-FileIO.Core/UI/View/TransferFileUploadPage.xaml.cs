@@ -10,13 +10,13 @@ namespace Device2DeviceFileIO.UI.View
     {
         public TransferFileUploadVm ViewModel { get; set; }
         
-        public TransferFileUploadPage(TransferFile uploadTransferFile)
+        public TransferFileUploadPage(TransferFile uploadTransferFile, QRCode qRCode)
         {
             InitializeComponent();
 
             Title = "Upload";
 
-            ViewModel = new TransferFileUploadVm(uploadTransferFile);
+            ViewModel = new TransferFileUploadVm(uploadTransferFile, qRCode);
             ViewModel.Navigation = Navigation;
 
             BindingContext = ViewModel;

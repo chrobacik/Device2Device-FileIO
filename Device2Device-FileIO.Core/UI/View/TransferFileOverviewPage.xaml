@@ -53,6 +53,8 @@
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Padding="0,32,0,16" HorizontalOptions="FillAndExpand">
+                    <!-- IsEnabled="{(DownloadTransferFile) ? true : false}" -->
+                    <!-- <Button Command="{Binding StartCommand}" IsEnabled="{Binding StartEnabled}" /> -->
                     <Button x:Name="btnShare" Text="Teilen" Command="{Binding ShareCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
                 </StackLayout>
 

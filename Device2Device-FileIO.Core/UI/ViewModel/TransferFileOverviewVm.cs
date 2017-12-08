@@ -10,7 +10,10 @@ namespace Device2DeviceFileIO.UI.ViewModel
     {
 
         public TransferFileOverviewVm() {
-            
+            ((App)Application.Current).ShareHandler.ShareFileRequestReceived += async (object sender, System.EventArgs e) => {
+                UploadTransferFile = ((IShareHandler)sender).ReceiveFile();
+                await Navigation.PushAsync(new TransferFileUploadPage(UploadTransferFile, QRCode));
+            };
         }
 
         public INavigation Navigation { get; set; }
@@ -43,13 +46,20 @@ namespace Device2DeviceFileIO.UI.ViewModel
             set { SetProperty(ref _downloadTransferFile, value); }
         }
 
+        private QRCode _qRCode;
+        public QRCode QRCode
+        {
+            get { return _qRCode; }
+            set { SetProperty(ref _qRCode, value); }
+        }
+
         // lazy instantiation
         private ICommand _transferFileUploadCmd;
         public ICommand TransferFileUploadCommand => _transferFileUploadCmd ?? (_transferFileUploadCmd = new Command(() => TransferFileUpload()));
 
         async public void TransferFileUpload()
         {
-            await Navigation.PushAsync(new TransferFileUploadPage(UploadTransferFile));
+            await Navigation.PushAsync(new TransferFileUploadPage(UploadTransferFile, QRCode));
         }
 
         // lazy instantiation
@@ -58,7 +68,7 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         async public void ReadyToReceive()
         {
-            await Navigation.PushAsync(new QRCodeScanPage());
+            await Navigation.PushAsync(new QRCodeScanPage(UploadTransferFile, QRCode));
         }
 
         // lazy instantiation
