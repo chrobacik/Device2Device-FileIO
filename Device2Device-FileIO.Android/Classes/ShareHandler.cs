@@ -13,7 +13,9 @@ namespace Device2DeviceFileIO.Droid.Classes
     class ShareHandler : IShareHandler
     {
         public  Activity CurrentActivity { protected get;  set; }
-        public IFileHandler FileHandler { protected get; set; }
+        private IFileHandler _FileHandler;
+        public IFileHandler FileHandler { get { return _FileHandler ?? (_FileHandler = new FileHandler()); } }
+
         private TransferFile SharedFile { get; set; }
 
         private string GetMimeTypeFromUri(Android.Net.Uri uri)
@@ -57,7 +59,11 @@ namespace Device2DeviceFileIO.Droid.Classes
                         //using this
                         file.Type = GetMimeTypeFromUri(fileUri);
                     }
+
+                    
                 }
+
+                file.Status = new TransferStatus() { State = TransferStatus.TypeState.ReceivedFromOS, Percentage = 0 };
 
                 //get file data
                 var firstClipDataItem = CurrentActivity.Intent.ClipData.GetItemAt(0);
@@ -70,6 +76,8 @@ namespace Device2DeviceFileIO.Droid.Classes
                 file.Size = file.Content.Length;
 
                 FileHandler.Save(file);
+                file.Status.Percentage = 1;
+
                 SharedFile = file;
 
                 //Notify Observers
@@ -79,15 +87,15 @@ namespace Device2DeviceFileIO.Droid.Classes
 
         public ShareHandler() { }
 
-        public void SetContext(Activity currentActivity, IFileHandler fileHandler)
+        public void SetContext(Activity currentActivity)
         {
             this.CurrentActivity = currentActivity;
-            this.FileHandler = fileHandler;
         }
 
-        public ShareHandler(Activity currentActivity, IFileHandler fileHandler)
+        public ShareHandler(Activity currentActivity)
         {
-            SetContext(currentActivity, fileHandler);
+            SetContext(currentActivity);
+           
         }
 
         public event EventHandler ShareFileRequestReceived = delegate { };
@@ -99,6 +107,9 @@ namespace Device2DeviceFileIO.Droid.Classes
 
         public void ProvideFile(TransferFile transferFile)
         {
+            //Xamarin.Forms.Device.OpenUri(new Uri(transferFile.StoragePath));
+
+            
             FileHandler.Load(transferFile);
 
             var sendFileIntent = new Intent(Intent.ActionSend);

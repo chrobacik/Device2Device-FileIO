@@ -1,4 +1,5 @@
 ﻿using Device2DeviceFileIO.Classes;
+using Device2DeviceFileIO.iOS.Classes;
 using Device2DeviceFileIO.iOS.Services;
 using Foundation;
 using UIKit;
@@ -28,6 +29,18 @@ namespace Device2DeviceFileIO.iOS
             });
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            var appShareHandler = ((App)App.Current).ShareHandler as ShareHandler;
+
+            if (appShareHandler.HandleOpenUrl(url))
+            {
+                return true;
+            }
+
+            return base.OpenUrl(app, url, options);
         }
 
     }

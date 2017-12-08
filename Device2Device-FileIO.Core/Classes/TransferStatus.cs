@@ -18,5 +18,10 @@ namespace Device2DeviceFileIO.Classes
         public float Percentage { get; set; }
         public String ErrorMessage { get; set; }
         public Exception Exception { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.GetType().ToString()}:: State: {State}, Percentage: {Percentage}, ErrorMessage: {ErrorMessage}, {Exception?.Message}";
+        }
     }
 }

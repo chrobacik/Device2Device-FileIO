@@ -10,6 +10,7 @@ namespace Device2DeviceFileIO.Classes
         public byte[] Content { get; set; }
         public TransferStatus Status { get; set; }
         public String StoragePath { get; set; }
+
         public TransferFile()
         {
             Status = new TransferStatus
@@ -17,6 +18,11 @@ namespace Device2DeviceFileIO.Classes
                 State = TransferStatus.TypeState.Pending,
                 Percentage = 0F
             };
+        }
+
+        public override string ToString()
+        {
+            return $"{this.GetType().ToString()}:: Name: {Name}, Type: {Type}, Content: {Content}, Size: {Size}, StoragePath: {StoragePath}, Status: {Status}";
         }
     }
 }

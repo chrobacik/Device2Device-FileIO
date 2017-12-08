@@ -17,9 +17,45 @@ namespace Device2DeviceFileIO.iOS.Classes
     {
         public event EventHandler ShareFileRequestReceived = delegate { };
 
-        public IFileHandler FileHandler { protected get; set; }
+        private IFileHandler _FileHandler;
+        public IFileHandler FileHandler { get { return _FileHandler ?? (_FileHandler = new FileHandler()); } }
         private TransferFile SharedFile { get; set; }
 
+        public bool HandleOpenUrl(NSUrl url)
+        {
+            if (url?.IsFileUrl == true)
+            {
+                var file = new TransferFile()
+                {
+                    Name = url.LastPathComponent,
+                    StoragePath = url.AbsoluteString,
+                    Type = GetMimeTypeFromFileExtension(url.AbsoluteString),
+                    Status = new TransferStatus()
+                    {
+                        State = TransferStatus.TypeState.ReceivedFromOS,
+                        Percentage = 0
+                    }
+                };
+
+                //RESC: Keine Ahnung obs damit getan ist, an den Inhalt der Datei unter IOS zu gelangen
+                FileHandler.Load(file);
+                FileHandler.Save(file);
+
+                file.Status.Percentage = 1;
+
+                SharedFile = file;
+
+                OnShareFileRequestReceived();
+
+                return true;
+            }
+
+#if DEBUG
+            Console.WriteLine($"{this.GetType().ToString()}.HandleOpenUrl: Url.Path is {url.Path}");
+#endif
+
+            return false;
+        }
         private void OnShareFileRequestReceived()
         {
             ShareFileRequestReceived(this, new EventArgs());
@@ -28,7 +64,10 @@ namespace Device2DeviceFileIO.iOS.Classes
         // MUST BE CALLED FROM THE UI THREAD
         public async void ProvideFile(TransferFile transferFile)
         {
+  
+
             var items = new NSObject[] { NSObject.FromObject(transferFile.Name), NSUrl.FromFilename(transferFile.StoragePath) };
+            
             var activityController = new UIActivityViewController(items, null);
             var vc = GetPresentedViewController();
 
@@ -49,7 +88,7 @@ namespace Device2DeviceFileIO.iOS.Classes
 
         public TransferFile ReceiveFile()
         {
-            OnShareFileRequestReceived();
+
             throw new NotImplementedException();
         }
 
@@ -71,6 +110,11 @@ namespace Device2DeviceFileIO.iOS.Classes
             }
 
             return rootController.PresentedViewController;
+        }
+
+        private String GetMimeTypeFromFileExtension(String Path)
+        {
+            return null;
         }
 
     }
