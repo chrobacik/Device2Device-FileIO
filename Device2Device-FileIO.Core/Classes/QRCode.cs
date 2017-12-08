@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Web;
 using Device2DeviceFileIO.UI.ViewModel;
 using Xamarin.Forms;
 using ZXing.Rendering;
@@ -22,7 +23,14 @@ namespace Device2DeviceFileIO.Classes
 
         public String GetData()
         {
-            return Url;
+            var builder = new UriBuilder(Url)
+            {
+                Port = -1 // This will remove any port number
+            };
+
+            builder.Query = Uri.EscapeUriString($"filename={FileName}&expiration={ExpirationDate.ToString("yyyyMMdd")}&key={Key}");
+
+            return builder.ToString();
         }
 
         public ImageSource CreateImage(int width, int height, int margin)
