@@ -49,6 +49,12 @@ namespace Device2DeviceFileIO.Droid
             });
         }
 
+        protected override void OnStop()
+        {
+            base.OnStop();
+            MessagingCenter.Unsubscribe<FileOperation.UploadMessage>(this, FileOperation.UPLOAD);
+            MessagingCenter.Unsubscribe<FileOperation.DownloadMessage>(this, FileOperation.DOWNLOAD);
+        }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             global::ZXing.Net.Mobile.Android.PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);

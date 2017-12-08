@@ -10,10 +10,17 @@ namespace Device2DeviceFileIO.UI.ViewModel
     {
 
         public TransferFileOverviewVm() {
-            ((App)Application.Current).ShareHandler.ShareFileRequestReceived += async (object sender, System.EventArgs e) => {
-                UploadTransferFile = ((IShareHandler)sender).ReceiveFile();
-                await Navigation.PushAsync(new TransferFileUploadPage(UploadTransferFile, QRCode));
-            };
+
+        }
+
+        
+
+        public void ShareHandler_ShareFileRequestReceived(object sender, System.EventArgs e)
+        {
+            UploadTransferFile = ((IShareHandler)sender).ReceiveFile();
+            TransferFileUpload();
+            //await Navigation.PushAsync(new TransferFileUploadPage(UploadTransferFile, QRCode));
+
         }
 
         public INavigation Navigation { get; set; }

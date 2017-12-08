@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Device2DeviceFileIO.UI.View.TransferFileUploadPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Device2DeviceFileIO.UI.View.TransferFileUploadPage"
+             xmlns:zx="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable"
+             
+             >
 
     <ScrollView>
         <StackLayout Spacing="0" Padding="0">
@@ -7,7 +13,13 @@
             <StackLayout Spacing="0" Padding="32" BackgroundColor="{StaticResource backgroundColorUpload}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
                 <StackLayout Orientation="Horizontal" Padding="0,0,0,32">
-                    <Image x:Name="qRCodeImage" Source="{Binding QRCode.BarCode}" WidthRequest="144" HeightRequest="144" HorizontalOptions="CenterAndExpand"></Image>
+                    <zx:ZXingBarcodeImageView BarcodeValue="{Binding QRCode.Url}" BarcodeFormat="QR_CODE" 
+                                              HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                                              >
+                        <zx:ZXingBarcodeImageView.BarcodeOptions>
+                            <zxcm:EncodingOptions  Height="144" Width="144"/>
+                        </zx:ZXingBarcodeImageView.BarcodeOptions>
+                    </zx:ZXingBarcodeImageView>
                 </StackLayout>
                 
                 <StackLayout Spacing="0">

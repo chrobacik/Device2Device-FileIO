@@ -21,6 +21,14 @@ namespace Device2DeviceFileIO.UI.View
 
             BindingContext = ViewModel;
 
+            App.GetCloudFileService().UploadFinished += ViewModel.TransferFileUploadVm_UploadFinished;
+
+            this.Disappearing += TransferFileUploadPage_Disappearing;
+        }
+
+        private void TransferFileUploadPage_Disappearing(object sender, EventArgs e)
+        {
+            App.GetCloudFileService().UploadFinished -= ViewModel.TransferFileUploadVm_UploadFinished;
         }
     }
 }

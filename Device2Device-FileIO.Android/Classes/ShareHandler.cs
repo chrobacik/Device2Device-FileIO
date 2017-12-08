@@ -42,7 +42,8 @@ namespace Device2DeviceFileIO.Droid.Classes
                 var file = new TransferFile();
                 var cr = CurrentActivity.ContentResolver;
 
-                 //get file name and type
+                //get file name and type
+                
                 string[] projection = { MediaStore.MediaColumns.DisplayName, MediaStore.MediaColumns.MimeType, MediaStore.MediaColumns.Size };
                 using (var metadataCursor = cr.Query(fileUri, projection, null, null, null))
                 {
@@ -57,6 +58,7 @@ namespace Device2DeviceFileIO.Droid.Classes
                         //File.Type = metadataCursor.GetString(
                         //    Array.IndexOf(projection, MediaStore.MediaColumns.MimeType));
                         //using this
+                        //cr.GetType(fileUri);
                         file.Type = GetMimeTypeFromUri(fileUri);
                     }
 

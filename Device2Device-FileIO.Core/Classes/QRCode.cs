@@ -3,13 +3,26 @@ using System.IO;
 using Device2DeviceFileIO.UI.ViewModel;
 using Xamarin.Forms;
 using ZXing.Rendering;
+using Android.Graphics;
 
 namespace Device2DeviceFileIO.Classes
 {
     public class QRCode : BindableBase
     {
-        public String Url { get; set; }
-        public String FileName { get; set; }
+        String _Url;
+        public String Url
+        {
+            get { return _Url; }
+            set { SetProperty(ref _Url, value); }
+        }
+
+        String _FileName;
+        public String FileName
+        {
+            get { return _FileName; }
+            set { SetProperty(ref _FileName, value); }
+        }
+
         public DateTime ExpirationDate { get; set; }
         public byte[] Key { get; set; }
 
@@ -37,14 +50,16 @@ namespace Device2DeviceFileIO.Classes
                     Height = height,
                     Margin = margin
                 },
-                Renderer = new PixelDataRenderer()
+                Renderer = new  PixelDataRenderer()
 
             };
 
             // Write data to QR code
             var barcode = writer.Write(GetData());
+            
 
             BarCode = ImageSource.FromStream(() => new MemoryStream(barcode.Pixels));
+
             return _barCode;
         }
     }

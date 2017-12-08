@@ -38,6 +38,17 @@ namespace Device2DeviceFileIO.UI.View
             App.GetCloudFileService().DownloadFinished += (object sender, FileOperation.DownloadFinsihedEventArgs e) => {
                 prgDownloadFile.ProgressTo(e.File.Status.Percentage, _animationInterval, _easing);
             };
+
+            ((App)Application.Current).ShareHandler.ShareFileRequestReceived += ViewModel.ShareHandler_ShareFileRequestReceived;
+            //this.Appearing += TransferFileOverviewPage_Appearing;
+            this.Disappearing += TransferFileOverviewPage_Disappearing;
         }
+
+        private void TransferFileOverviewPage_Disappearing(object sender, System.EventArgs e)
+        {
+            ((App)Application.Current).ShareHandler.ShareFileRequestReceived -= ViewModel.ShareHandler_ShareFileRequestReceived;
+        }
+
+
     }
 }

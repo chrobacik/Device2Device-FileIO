@@ -13,23 +13,23 @@ namespace Device2DeviceFileIO.UI.ViewModel
         const double _defaultxpirationInDay = 1;
 
         public TransferFileUploadVm(TransferFile uploadTransferFile, QRCode qRCode) {
+            QRCode = new QRCode();
             UploadTransferFile = uploadTransferFile;
-            QRCode = qRCode;
+            
             _expirationDate = DateTime.Now.AddDays(_defaultxpirationInDay);
 
-            App.GetCloudFileService().UploadFinished += (object sender, FileOperation.UploadFinishedEventArgs e) => {
-                // Fehlerhandling, wenn File-Status Failed
-                UploadTransferFile = e.File;
-
-                QRCode = new QRCode();
-                QRCode.Url = e.Code.Url;
-
-                e.Code.CreateImage(144, 144, 0);
-                QRCode.BarCode = e.Code.BarCode;
-
-                // QRCode.CreateImage(144, 144, 0);
-            };
         }
+
+        public void TransferFileUploadVm_UploadFinished(object sender, FileOperation.UploadFinishedEventArgs e)
+        {
+            if (e.File.Status.State != TransferStatus.TypeState.Failed)
+            {
+                UploadTransferFile = e.File;
+                QRCode.FileName = e.Code.FileName;
+                QRCode.Url = e.Code.Url;
+            }
+        }
+
 
         public INavigation Navigation { get; set; }
 
