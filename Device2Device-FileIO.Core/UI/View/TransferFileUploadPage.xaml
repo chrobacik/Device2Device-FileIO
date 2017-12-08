@@ -80,6 +80,7 @@
                     </StackLayout>
                     <StackLayout Padding="8" BackgroundColor="#606060">
                         <StackLayout Padding="4" BackgroundColor="#494949">
+                            <!-- Change colors https://forums.xamarin.com/discussion/23562/change-the-text-color-for-xamarin-forms-datepicker -->
                             <DatePicker Style="{StaticResource datePicker}" Date="{Binding ExpirationDate}">
                                 <DatePicker.Format>dd.MM.yyyy</DatePicker.Format>
                                 <!--DatePicker.MinimumDate>
@@ -103,7 +104,7 @@
 
                 <!-- TODO: Bottom -->
                 <StackLayout Orientation="Horizontal" Padding="0,32,0,16" HorizontalOptions="FillAndExpand">
-                    <Button x:Name="btnSend" Text="Senden" Command="{Binding StartUploadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
+                    <Button x:Name="btnSend" Text="Senden" Command="{Binding StartUploadCommand}" IsEnabled="{Binding IsBtnSendEnabled}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
                 </StackLayout>
                       
             </StackLayout>

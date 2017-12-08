@@ -71,7 +71,7 @@
 
                 <!-- TODO: Bottom -->
                 <StackLayout Orientation="Horizontal" Padding="0,32,0,16" HorizontalOptions="FillAndExpand">
-                    <Button x:Name="btnReadyToReceive" Text="Empfangen" Command="{Binding StartDownloadCommand}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
+                    <Button x:Name="btnReadyToReceive" Text="Empfangen" Command="{Binding StartDownloadCommand}" IsEnabled="{Binding IsBtnReadyToReceiveEnabled}" BackgroundColor="{StaticResource backgroundColorDefault}" Style="{StaticResource buttonStyle}"></Button>
                 </StackLayout>
 
             </StackLayout>

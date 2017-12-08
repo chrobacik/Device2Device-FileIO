@@ -20,5 +20,21 @@ namespace Device2DeviceFileIO.Test
 
             Assert.Fail();
         }
+
+        [Test()]
+        public void QRCodeDataTest()
+        {
+            var qRCode = new QRCode()
+            {
+                Url = "http://localhost",
+                FileName = "bla bla.txt",
+                ExpirationDate = DateTime.Now
+            };
+
+            var expected = "http://localhost/?filename=bla%20bla.txt&expiration=20171208&key=";
+            var data = qRCode.GetData();
+
+            Assert.AreEqual(expected, data);
+        }
     }
 }

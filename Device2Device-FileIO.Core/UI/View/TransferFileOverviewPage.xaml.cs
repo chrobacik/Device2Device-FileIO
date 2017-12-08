@@ -15,13 +15,15 @@ namespace Device2DeviceFileIO.UI.View
         {
             InitializeComponent();
 
-            Title = "Device2Device FileIO";
+            Title = "Device2Device-FileIO";
+            Icon = "ic_upload.png";
 
             ViewModel = new TransferFileOverviewVm();
             ViewModel.Navigation = Navigation;
 
             BindingContext = ViewModel;
 
+            // FIXME: Verschieben in VM mit Data Binding
             prgUploadFile.Progress = 0.0;
             App.GetCloudFileService().UploadProgress += (object sender, FileOperation.UploadProgressEventArgs e) => {
                 prgUploadFile.ProgressTo(e.File.Status.Percentage, _animationInterval, _easing);
@@ -31,6 +33,7 @@ namespace Device2DeviceFileIO.UI.View
                 prgUploadFile.ProgressTo(1.0, _animationInterval, _easing);
             };
 
+            // FIXME: Verschieben in VM mit Data Binding
             prgDownloadFile.Progress = 0.0;
             App.GetCloudFileService().DownloadProgress += (object sender, FileOperation.DownloadProgressEventArgs e) => {
                 prgDownloadFile.ProgressTo(e.File.Status.Percentage, _animationInterval, _easing);

@@ -9,9 +9,10 @@ namespace Device2DeviceFileIO.UI.ViewModel
     public class BarcodeScannerVm : BindableBase
     {
         
-        public BarcodeScannerVm(TransferFile downloadTransferFile)
+        public BarcodeScannerVm(TransferFile downloadTransferFile, QRCode qRCode)
         {
             DownloadTransferFile = downloadTransferFile;
+            QRCode = qRCode;
         }
 
         public INavigation Navigation { get; set; }
@@ -22,6 +23,13 @@ namespace Device2DeviceFileIO.UI.ViewModel
         {
             get { return _downloadTransferFile; }
             set { SetProperty(ref _downloadTransferFile, value); }
+        }
+
+        private QRCode _qRCode;
+        public QRCode QRCode
+        {
+            get { return _qRCode; }
+            set { SetProperty(ref _qRCode, value); }
         }
 
         private bool _isAnalyzing = true;
@@ -44,7 +52,7 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         async public void TransferFileDownload()
         {
-            await Navigation.PushAsync(new TransferFileDownloadPage());
+            await Navigation.PushAsync(new TransferFileDownloadPage(DownloadTransferFile, QRCode));
         }
 
         // lazy instantiation

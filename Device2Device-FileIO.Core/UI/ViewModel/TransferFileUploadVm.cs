@@ -5,6 +5,7 @@ using Device2DeviceFileIO.Classes;
 using Xamarin.Forms;
 using Device2DeviceFileIO.UI.View;
 using Device2DeviceFileIO.Interfaces;
+using Plugin.Connectivity;
 
 namespace Device2DeviceFileIO.UI.ViewModel
 {
@@ -25,13 +26,28 @@ namespace Device2DeviceFileIO.UI.ViewModel
             if (e.File.Status.State != TransferStatus.TypeState.Failed)
             {
                 UploadTransferFile = e.File;
-                QRCode.FileName = e.Code.FileName;
-                QRCode.Url = e.Code.Url;
+
+
+
+                // FIXME: Button "send" nur aktivieren, wenn ein TransferFile und Netzwerkzugriff vorhanden ist
+                /*
+                IsBtnSendEnabled = (UploadTransferFile != null && App.HasConnectivity()) ? true : false;
+                CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
+                {
+                    IsBtnSendEnabled = (UploadTransferFile != null && args.IsConnected) ? true : false;
+                };
+                */
             }
         }
 
-
         public INavigation Navigation { get; set; }
+
+        private bool _isBtnSendEnabled = true;
+        public bool IsBtnSendEnabled
+        {
+            get { return _isBtnSendEnabled; }
+            set { SetProperty(ref _isBtnSendEnabled, value); }
+        }
 
         private TransferFile _uploadTransferFile;
         public TransferFile UploadTransferFile
@@ -60,8 +76,9 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         async public void StartUpload()
         {
+            // FIXME: UploadTransferFile mit korrektem ExpirationDate (DatePicker aus der View) hochladen
             App.GetCloudFileService().Upload(UploadTransferFile);
-            // await Navigation.PopAsync();
+            await Navigation.PopAsync();
         }
     }
 }

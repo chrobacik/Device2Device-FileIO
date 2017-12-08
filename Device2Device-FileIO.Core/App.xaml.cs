@@ -1,6 +1,7 @@
 ﻿using Device2DeviceFileIO.Classes;
 using Device2DeviceFileIO.Interfaces;
 using Device2DeviceFileIO.UI.View;
+using Plugin.Connectivity;
 using Xamarin.Forms;
 
 namespace Device2DeviceFileIO
@@ -22,7 +23,9 @@ namespace Device2DeviceFileIO
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new TransferFileOverviewPage());
+            MainPage = new NavigationPage(new TransferFileOverviewPage()) {
+                BarBackgroundColor = Color.FromHex("#2ebced"), BarTextColor = Color.White
+            };
         }
 
         protected override void OnStart()
@@ -48,6 +51,23 @@ namespace Device2DeviceFileIO
             }
 
             return mFileServiceInstance;
+        }
+
+        public static bool HasConnectivity()
+        {
+            if (!CrossConnectivity.IsSupported)
+                return true;
+
+            //Do this only if you need to and aren't listening to any other events as they will not fire.
+            var connectivity = CrossConnectivity.Current;
+            try
+            {
+                return connectivity.IsConnected;
+            }
+            finally
+            {
+                CrossConnectivity.Dispose();
+            }
         }
     }
 }

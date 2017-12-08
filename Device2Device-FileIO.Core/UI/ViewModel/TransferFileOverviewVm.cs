@@ -25,6 +25,34 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         public INavigation Navigation { get; set; }
 
+        private bool _isBtnReadyToReceiveEnabled = true;
+        public bool IsBtnReadyToReceiveEnabled
+        {
+            get { return _isBtnReadyToReceiveEnabled; }
+            set { SetProperty(ref _isBtnReadyToReceiveEnabled, value); }
+        }
+
+        private bool _isBtnShareEnabled = true;
+        public bool IsBtnShareEnabled
+        {
+            get { return _isBtnShareEnabled; }
+            set { SetProperty(ref _isBtnShareEnabled, value); }
+        }
+
+        private bool _isPrgUploadFileVisible = true;
+        public bool IsPrgUploadFileVisible
+        {
+            get { return _isPrgUploadFileVisible; }
+            set { SetProperty(ref _isPrgUploadFileVisible, value); }
+        }
+
+        private bool _isPrgDownloadFileVisible = true;
+        public bool IsPrgDownloadFileVisible
+        {
+            get { return _isPrgDownloadFileVisible; }
+            set { SetProperty(ref _isPrgDownloadFileVisible, value); }
+        }
+
         private ProgressBar _progressUploadFile;
         public ProgressBar ProgressUploadFile
         {
@@ -84,16 +112,19 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         async public void BarcodeScanner()
         {
-            await Navigation.PushAsync(new BarcodeScannerPage(DownloadTransferFile));
+            await Navigation.PushAsync(new BarcodeScannerPage(DownloadTransferFile,QRCode));
+            // Nur für Tests ohne Barcode
+            // await Navigation.PushAsync(new TransferFileDownloadPage(DownloadTransferFile, QRCode));
         }
 
         // lazy instantiation
         private ICommand _shareCommand;
         public ICommand ShareCommand => _shareCommand ?? (_shareCommand = new Command(() => Share()));
 
-        async public void Share()
+        public void Share()
         {
-            // TODO
+            // FIXME: Teilen/Share-Button kann nur geklickt werden, wenn auch ein DownloadTransferFile vorhanden ist
+            ((App)Application.Current).ShareHandler.ProvideFile(DownloadTransferFile);
         }
     }
 }

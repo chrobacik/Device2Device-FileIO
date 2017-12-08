@@ -10,29 +10,33 @@ namespace Device2DeviceFileIO.UI.View
     {
         public BarcodeScannerVm ViewModel { get; set; }
 
-        public BarcodeScannerPage(TransferFile downloadTransferFile)
+        public BarcodeScannerPage(TransferFile downloadTransferFile, QRCode qRCode)
         {
             InitializeComponent();
 
-            Title = "Scanner";
+            Title = "Scanne QR-Code";
 
-            ViewModel = new BarcodeScannerVm(downloadTransferFile);
+            ViewModel = new BarcodeScannerVm(downloadTransferFile, qRCode);
             ViewModel.Navigation = Navigation;
 
             BindingContext = ViewModel;
 
+            // FIXME: In VM verschieben (stürzt aber leider ab im VM, analysieren wieso)
             scannerView.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
 
                 // Stop analysis until we navigate away so we don't keep reading barcodes
                 scannerView.IsAnalyzing = false;
 
+                // FIXME: new QRCode erstellen aus dem Event (result.Text)
+
                 // Show an alert
                 await DisplayAlert("Scanned Barcode", result.Text, "OK");
 
+                // qRCode = new QRCode();
                 MessagingCenter.Send<object, string>(this, "QRCodeScanned", result.Text);
 
                 // Navigate away
-                await Navigation.PushAsync(new TransferFileDownloadPage());
+                await Navigation.PushAsync(new TransferFileDownloadPage(downloadTransferFile, qRCode));
             });
         }
 
