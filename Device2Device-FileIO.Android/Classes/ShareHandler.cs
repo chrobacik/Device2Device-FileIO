@@ -111,7 +111,7 @@ namespace Device2DeviceFileIO.Droid.Classes
         {
             //Xamarin.Forms.Device.OpenUri(new Uri(transferFile.StoragePath));
 
-            
+            FileHandler.Save(transferFile);
             FileHandler.Load(transferFile);
 
             var sendFileIntent = new Intent(Intent.ActionSend);
