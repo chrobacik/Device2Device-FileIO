@@ -30,6 +30,7 @@ namespace Device2DeviceFileIO.UI.ViewModel
                 DownloadTransferFile.Name = e.File.Name;
                 DownloadTransferFile.Size = e.File.Size;
                 DownloadTransferFile.Type = e.File.Type;
+                DownloadTransferFile.Content = e.File.Content;
                 DownloadTransferFile.Status.State = e.File.Status.State;
             } else {
                 DownloadTransferFile.Status.State = e.File.Status.State;
