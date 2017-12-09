@@ -228,6 +228,7 @@ namespace Device2DeviceFileIO.FileIO
                 // Set link to QR code
                 CurrentUpload.Code.Url = result.Link;
                 CurrentUpload.File.Status.State = TransferStatus.TypeState.Completed;
+                CurrentUpload.File.Status.Percentage = 1F;
             }
             catch (HttpRequestException httpEx)
             {
@@ -308,6 +309,7 @@ namespace Device2DeviceFileIO.FileIO
 
                 // Everything works fine, change state to completed
                 CurrentDownload.File.Status.State = TransferStatus.TypeState.Completed;
+                CurrentDownload.File.Status.Percentage = 1F;
             }
             catch (FileNotFoundException fileNotFoundEx)
             {
