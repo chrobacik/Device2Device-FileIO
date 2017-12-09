@@ -30,10 +30,13 @@ namespace Device2DeviceFileIO.UI.View
                 // FIXME: new QRCode erstellen aus dem Event (result.Text)
 
                 // Show an alert
-                await DisplayAlert("Scanned Barcode", result.Text, "OK");
+                // await DisplayAlert("Scanned Barcode", result.Text, "OK");
 
                 // qRCode = new QRCode();
-                MessagingCenter.Send<object, string>(this, "QRCodeScanned", result.Text);
+                // MessagingCenter.Send<object, string>(this, "QRCodeScanned", result.Text);
+
+                qRCode = new QRCode();
+                qRCode.Url = result.Text;
 
                 // Navigate away
                 await Navigation.PushAsync(new TransferFileDownloadPage(downloadTransferFile, qRCode));

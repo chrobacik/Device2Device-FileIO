@@ -10,10 +10,9 @@ namespace Device2DeviceFileIO.UI.ViewModel
     {
 
         public TransferFileOverviewVm() {
-
+            DownloadTransferFile = App.CurrentDownloadFile;
+            QRCode = App.CurrentDownloadQRCode;
         }
-
-        
 
         public void ShareHandler_ShareFileRequestReceived(object sender, System.EventArgs e)
         {
@@ -21,6 +20,17 @@ namespace Device2DeviceFileIO.UI.ViewModel
             TransferFileUpload();
             //await Navigation.PushAsync(new TransferFileUploadPage(UploadTransferFile, QRCode));
 
+        }
+
+        public void DownloadHandler(object sender, FileOperation.DownloadFinsihedEventArgs e)
+        {
+            if (e.File != null)
+            {
+                DownloadTransferFile.Name = e.File.Name;
+                DownloadTransferFile.Size = e.File.Size;
+                DownloadTransferFile.Type = e.File.Type;
+                DownloadTransferFile.Status.State = e.File.Status.State;
+            }
         }
 
         public INavigation Navigation { get; set; }
@@ -113,8 +123,6 @@ namespace Device2DeviceFileIO.UI.ViewModel
         async public void BarcodeScanner()
         {
             await Navigation.PushAsync(new BarcodeScannerPage(DownloadTransferFile,QRCode));
-            // Nur für Tests ohne Barcode
-            // await Navigation.PushAsync(new TransferFileDownloadPage(DownloadTransferFile, QRCode));
         }
 
         // lazy instantiation

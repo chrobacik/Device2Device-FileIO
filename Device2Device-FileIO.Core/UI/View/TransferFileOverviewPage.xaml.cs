@@ -16,7 +16,7 @@ namespace Device2DeviceFileIO.UI.View
             InitializeComponent();
 
             Title = "Device2Device-FileIO";
-            Icon = "ic_upload.png";
+            Icon = "ic_launcher.png";
 
             ViewModel = new TransferFileOverviewVm();
             ViewModel.Navigation = Navigation;
@@ -42,6 +42,9 @@ namespace Device2DeviceFileIO.UI.View
                 prgDownloadFile.ProgressTo(e.File.Status.Percentage, _animationInterval, _easing);
             };
 
+
+            App.GetCloudFileService().DownloadFinished += ViewModel.DownloadHandler;
+                
             ((App)Application.Current).ShareHandler.ShareFileRequestReceived += ViewModel.ShareHandler_ShareFileRequestReceived;
             //this.Appearing += TransferFileOverviewPage_Appearing;
             this.Disappearing += TransferFileOverviewPage_Disappearing;
@@ -50,6 +53,7 @@ namespace Device2DeviceFileIO.UI.View
         private void TransferFileOverviewPage_Disappearing(object sender, System.EventArgs e)
         {
             ((App)Application.Current).ShareHandler.ShareFileRequestReceived -= ViewModel.ShareHandler_ShareFileRequestReceived;
+            App.GetCloudFileService().DownloadFinished -= ViewModel.DownloadHandler;
         }
 
 

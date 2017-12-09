@@ -11,12 +11,10 @@ namespace Device2DeviceFileIO.UI.ViewModel
     {
         public TransferFileDownloadVm(TransferFile downloadTransferFile, QRCode qRCode)
         {
-            DownloadTransferFile = downloadTransferFile;
+            DownloadTransferFile = App.CurrentDownloadFile;
             QRCode = qRCode;
 
-            App.GetCloudFileService().DownloadFinished += (object sender, FileOperation.DownloadFinsihedEventArgs e) => {
-                DownloadTransferFile = e.File;
-            };
+
 
             // FIXME: Button "send" nur aktivieren, wenn ein TransferFile und Netzwerkzugriff vorhanden ist
             /*
