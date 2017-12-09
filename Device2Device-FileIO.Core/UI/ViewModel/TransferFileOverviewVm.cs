@@ -10,10 +10,9 @@ namespace Device2DeviceFileIO.UI.ViewModel
     {
 
         public TransferFileOverviewVm() {
-
+            DownloadTransferFile = App.CurrentDownloadFile;
+            QRCode = App.CurrentDownloadQRCode;
         }
-
-        
 
         public void ShareHandler_ShareFileRequestReceived(object sender, System.EventArgs e)
         {
@@ -21,6 +20,25 @@ namespace Device2DeviceFileIO.UI.ViewModel
             TransferFileUpload();
             //await Navigation.PushAsync(new TransferFileUploadPage(UploadTransferFile, QRCode));
 
+        }
+
+        public void DownloadHandler(object sender, FileOperation.DownloadFinsihedEventArgs e)
+        {
+            ProgressDownloadFile.ProgressTo(1.0, 250, Easing.Linear);
+            if (e.File != null)
+            {
+                DownloadTransferFile.Name = e.File.Name;
+                DownloadTransferFile.Size = e.File.Size;
+                DownloadTransferFile.Type = e.File.Type;
+                DownloadTransferFile.Status.State = e.File.Status.State;
+            } else {
+                DownloadTransferFile.Status.State = e.File.Status.State;
+            }
+        }
+
+        public void DownloadProgressHandler(object sender, FileOperation.DownloadProgressEventArgs e)
+        {
+            ProgressDownloadFile.ProgressTo(e.File.Status.Percentage, 250, Easing.Linear);
         }
 
         public INavigation Navigation { get; set; }
@@ -103,6 +121,8 @@ namespace Device2DeviceFileIO.UI.ViewModel
 
         async public void ReadyToReceive()
         {
+            // FIXME: Sobald der Downloadprogress vom Service funktioniert, kann die folgenden Zeile entfernt werden
+            await ProgressDownloadFile.ProgressTo(0, 250, Easing.Linear);
             await Navigation.PushAsync(new QRCodeScanPage(UploadTransferFile, QRCode));
         }
 
@@ -113,8 +133,6 @@ namespace Device2DeviceFileIO.UI.ViewModel
         async public void BarcodeScanner()
         {
             await Navigation.PushAsync(new BarcodeScannerPage(DownloadTransferFile,QRCode));
-            // Nur für Tests ohne Barcode
-            // await Navigation.PushAsync(new TransferFileDownloadPage(DownloadTransferFile, QRCode));
         }
 
         // lazy instantiation

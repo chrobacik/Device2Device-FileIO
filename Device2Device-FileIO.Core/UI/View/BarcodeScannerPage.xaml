@@ -25,8 +25,8 @@
         <forms:ZXingDefaultOverlay 
             x:Name="defaultOverlay"
             AutomationId="ZxingDefaultOverlay"
-            TopText="Hold your phone up to the barcode" 
-            BottomText="Scanning will happen automatically" 
+            TopText="Halte dein Gerät über den QR-Code" 
+            BottomText="Scanning erfolgt automatisch" 
             ShowFlashButton="true"
             Opacity="0.9">
         </forms:ZXingDefaultOverlay>

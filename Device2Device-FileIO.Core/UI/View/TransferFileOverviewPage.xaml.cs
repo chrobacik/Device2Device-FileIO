@@ -16,7 +16,7 @@ namespace Device2DeviceFileIO.UI.View
             InitializeComponent();
 
             Title = "Device2Device-FileIO";
-            Icon = "ic_upload.png";
+            Icon = "ic_launcher.png";
 
             ViewModel = new TransferFileOverviewVm();
             ViewModel.Navigation = Navigation;
@@ -34,6 +34,7 @@ namespace Device2DeviceFileIO.UI.View
             };
 
             // FIXME: Verschieben in VM mit Data Binding
+            /*
             prgDownloadFile.Progress = 0.0;
             App.GetCloudFileService().DownloadProgress += (object sender, FileOperation.DownloadProgressEventArgs e) => {
                 prgDownloadFile.ProgressTo(e.File.Status.Percentage, _animationInterval, _easing);
@@ -41,15 +42,29 @@ namespace Device2DeviceFileIO.UI.View
             App.GetCloudFileService().DownloadFinished += (object sender, FileOperation.DownloadFinsihedEventArgs e) => {
                 prgDownloadFile.ProgressTo(e.File.Status.Percentage, _animationInterval, _easing);
             };
+            */
+
+            // App.GetCloudFileService().DownloadFinished += ViewModel.DownloadHandler;
+            //App.GetCloudFileService().DownloadFinished += ViewModel.DownloadProgressHandler;
+
 
             ((App)Application.Current).ShareHandler.ShareFileRequestReceived += ViewModel.ShareHandler_ShareFileRequestReceived;
-            //this.Appearing += TransferFileOverviewPage_Appearing;
+            this.Appearing += TransferFileOverviewPage_Appearing;
             this.Disappearing += TransferFileOverviewPage_Disappearing;
+        }
+
+        private void TransferFileOverviewPage_Appearing(object sender, System.EventArgs e)
+        {
+            ViewModel.ProgressDownloadFile = prgDownloadFile;
+            App.GetCloudFileService().DownloadFinished += ViewModel.DownloadHandler;
+            App.GetCloudFileService().DownloadProgress += ViewModel.DownloadProgressHandler;
         }
 
         private void TransferFileOverviewPage_Disappearing(object sender, System.EventArgs e)
         {
             ((App)Application.Current).ShareHandler.ShareFileRequestReceived -= ViewModel.ShareHandler_ShareFileRequestReceived;
+            App.GetCloudFileService().DownloadFinished -= ViewModel.DownloadHandler;
+            App.GetCloudFileService().DownloadProgress -= ViewModel.DownloadProgressHandler;
         }
 
 

@@ -20,11 +20,6 @@ namespace Device2DeviceFileIO.UI.View
             ViewModel.Navigation = Navigation;
 
             BindingContext = ViewModel;
-
-            //Subscribe
-            MessagingCenter.Subscribe<object, string>(this, "QRCodeScanned", (sender, text) => {
-                Console.WriteLine(text);
-            });
         }
     }
 }
