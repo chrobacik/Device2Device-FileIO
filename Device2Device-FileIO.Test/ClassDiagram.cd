@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Device2DeviceFileIO.Classes.QRCode">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Device2DeviceFileIO.Classes.TransferFile">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Device2DeviceFileIO.Classes.TransferStatus" Collapsed="true">
+    <Position X="6.5" Y="3.75" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Device2DeviceFileIO.Classes.TransferStatus.TypeState" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="Device2DeviceFileIO.Interfaces.ICloudFileService">
+    <Position X="8.5" Y="0.5" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Device2DeviceFileIO.Interfaces.IFileCryptor">
+    <Position X="8.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Device2DeviceFileIO.Interfaces.IFileHandler">
+    <Position X="3.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Device2DeviceFileIO.Interfaces.IQRGenerator">
+    <Position X="0.75" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Device2DeviceFileIO.Interfaces.IQRScanner">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Device2DeviceFileIO.Interfaces.IShareHandler">
+    <Position X="0.5" Y="3.75" Width="2.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
