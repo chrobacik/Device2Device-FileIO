@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Device2DeviceFileIO.Interfaces
 {
@@ -12,7 +13,7 @@ namespace Device2DeviceFileIO.Interfaces
     {
         event EventHandler ShareFileRequestReceived;
         TransferFile ReceiveFile();
-        void ProvideFile(TransferFile transferFile);
+        Task ProvideFile(TransferFile transferFile);
     }
 
 }
