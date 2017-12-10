@@ -6,13 +6,14 @@ using Device2DeviceFileIO.Classes;
 using Device2DeviceFileIO.Droid.Classes;
 using Device2DeviceFileIO.Interfaces;
 using System;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 [assembly: Xamarin.Forms.DependencyAttribute(typeof(ShareHandler))]
 namespace Device2DeviceFileIO.Droid.Classes
 {
     class ShareHandler : IShareHandler
     {
-        public  Activity CurrentActivity { protected get;  set; }
         private IFileHandler _FileHandler;
         public IFileHandler FileHandler { get { return _FileHandler ?? (_FileHandler = new FileHandler()); } }
 
@@ -23,27 +24,33 @@ namespace Device2DeviceFileIO.Droid.Classes
             //this does not work since there is a name clash with getType form Uri and GetType from .Net
             //return uri.GetType();
 
-            var fileExtension = MimeTypeMap.GetFileExtensionFromUrl(uri.ToString());
+            return GetMimeTypeFromExtension(uri.ToString());
+        }
+
+        private string GetMimeTypeFromExtension(String PathUrl)
+        {
+            var fileExtension = MimeTypeMap.GetFileExtensionFromUrl(PathUrl);
             if (fileExtension != null)
                 return MimeTypeMap.Singleton.GetMimeTypeFromExtension(fileExtension);
 
             return String.Empty;
-        }
 
-        public void HandleShareIntent()
+        }
+        public void HandleShareIntent(Activity currentActivity)
         {
-            if (CurrentActivity.Intent.Action == Intent.ActionSend)
+            if (currentActivity.Intent.Action == Intent.ActionSend)
             {
-                var fileUri = CurrentActivity.Intent.GetParcelableExtra(Intent.ExtraStream) as Android.Net.Uri;
+                var fileUri = currentActivity.Intent.GetParcelableExtra(Intent.ExtraStream) as Android.Net.Uri;
 
                 //if fileUri is null, it seems there is no file 
                 if (fileUri == null) return;
 
                 var file = new TransferFile();
-                var cr = CurrentActivity.ContentResolver;
+                var cr = currentActivity.ContentResolver;
 
                 //get file name and type
-                
+                //ListMetaData(cr, fileUri);
+
                 string[] projection = { MediaStore.MediaColumns.DisplayName, MediaStore.MediaColumns.MimeType, MediaStore.MediaColumns.Size };
                 using (var metadataCursor = cr.Query(fileUri, projection, null, null, null))
                 {
@@ -68,14 +75,16 @@ namespace Device2DeviceFileIO.Droid.Classes
                 file.Status = new TransferStatus() { State = TransferStatus.TypeState.ReceivedFromOS, Percentage = 0 };
 
                 //get file data
-                var firstClipDataItem = CurrentActivity.Intent.ClipData.GetItemAt(0);
+                var firstClipDataItem = currentActivity.Intent.ClipData.GetItemAt(0);
                 var itemStream = cr.OpenInputStream(firstClipDataItem.Uri);
 
                 var localStream = new System.IO.MemoryStream();
                 itemStream.CopyTo(localStream);
 
                 file.Content = localStream.ToArray() ?? new byte[] { };
-                file.Size = file.Content.Length;
+
+                if (String.IsNullOrWhiteSpace(file.Name)) file.Name = fileUri.LastPathSegment;
+                if (file.Size <= 0) file.Size = file.Content.Length;
 
                 FileHandler.Save(file);
                 file.Status.Percentage = 1;
@@ -89,15 +98,20 @@ namespace Device2DeviceFileIO.Droid.Classes
 
         public ShareHandler() { }
 
-        public void SetContext(Activity currentActivity)
+       private void ListMetaData(ContentResolver resolver, Android.Net.Uri uri)
         {
-            this.CurrentActivity = currentActivity;
-        }
-
-        public ShareHandler(Activity currentActivity)
-        {
-            SetContext(currentActivity);
-           
+            using (var metadataCursor = resolver.Query(uri, null, null, null, null))
+            {
+                if (metadataCursor?.MoveToFirst() == true)
+                {
+                    String[] columns = metadataCursor.GetColumnNames();
+                    foreach (var c in columns)
+                    {
+                        var data = metadataCursor.GetString(metadataCursor.GetColumnIndex(c));
+                        Console.WriteLine($"Metadata-Column: {c} '{data}'");
+                    }
+                }
+            }
         }
 
         public event EventHandler ShareFileRequestReceived = delegate { };
@@ -107,20 +121,31 @@ namespace Device2DeviceFileIO.Droid.Classes
             ShareFileRequestReceived(this, new EventArgs());
         }
 
-        public void ProvideFile(TransferFile transferFile)
+        public Task ProvideFile(TransferFile transferFile)
         {
-            //Xamarin.Forms.Device.OpenUri(new Uri(transferFile.StoragePath));
-
             FileHandler.Save(transferFile);
-            FileHandler.Load(transferFile);
-
+            
             var sendFileIntent = new Intent(Intent.ActionSend);
+
+            if (string.IsNullOrWhiteSpace(transferFile.Type))
+                transferFile.Type = GetMimeTypeFromExtension(transferFile.StoragePath);
             sendFileIntent.SetType(transferFile.Type);
+
             var file = new Java.IO.File(transferFile.StoragePath);
             var uri = Android.Net.Uri.FromFile(file);
-            sendFileIntent.PutExtra(Intent.ExtraStream, uri);
 
-            CurrentActivity.StartActivity(sendFileIntent);
+            sendFileIntent.PutExtra(Intent.ExtraStream, uri);
+            sendFileIntent.PutExtra(Intent.ExtraText, "Empfangene Datei");
+            sendFileIntent.PutExtra(Intent.ExtraSubject, transferFile.Name);
+
+            var chooserIntent = Intent.CreateChooser(sendFileIntent, "Teilen mit...");
+            chooserIntent.SetFlags(ActivityFlags.ClearTop);
+            chooserIntent.SetFlags(ActivityFlags.NewTask);
+
+            Android.App.Application.Context.StartActivity(chooserIntent);
+
+            return Task.FromResult(true);
+
         }
 
         public TransferFile ReceiveFile()
