@@ -34,7 +34,7 @@ namespace Device2DeviceFileIO.Test
         {
         }
 
-        [Test()]
+        //[Test()]
         public void SendFileTest()
         {
             var service = new FileIO.FileService();
