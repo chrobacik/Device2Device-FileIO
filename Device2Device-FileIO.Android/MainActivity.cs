@@ -33,8 +33,7 @@ namespace Device2DeviceFileIO.Droid
             LoadApplication(new App());
 
             var appShareHandler = ((App)App.Current).ShareHandler as ShareHandler;
-            appShareHandler.SetContext(this);
-            appShareHandler.HandleShareIntent();
+            appShareHandler.HandleShareIntent(this);
 
             MessagingCenter.Subscribe<FileOperation.UploadMessage>(this, FileOperation.UPLOAD, message => {
 
