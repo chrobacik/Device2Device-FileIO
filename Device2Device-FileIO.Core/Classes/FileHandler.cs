@@ -9,11 +9,11 @@ namespace Device2DeviceFileIO.Classes
     {
         readonly string RootPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
 
-        public void Load(TransferFile transfer)
+        public void Load(TransferFile file)
         {
-            var filePath = Path.Combine(RootPath, transfer.Name);
-            transfer.Content = File.ReadAllBytes(filePath);
-            transfer.StoragePath = filePath;
+            var filePath = Path.Combine(RootPath, file.Name);
+            file.Content = File.ReadAllBytes(filePath);
+            file.StoragePath = filePath;
         }
 
 
@@ -24,7 +24,10 @@ namespace Device2DeviceFileIO.Classes
         public void Save(TransferFile file)
         {
             var filePath = Path.Combine(RootPath, file.Name);
-            if (File.Exists(filePath)) File.Delete(filePath);
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
             File.WriteAllBytes(filePath, file.Content);
             file.StoragePath = filePath;
         }
