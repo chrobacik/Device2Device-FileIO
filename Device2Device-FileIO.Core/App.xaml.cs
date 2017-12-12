@@ -23,7 +23,13 @@ namespace Device2DeviceFileIO
         {
             InitializeComponent();
 
+
+#if MAINPAGE
+            MainPage = new NavigationPage(new MainPage()) {
+#else
             MainPage = new NavigationPage(new TransferFileOverviewPage()) {
+#endif
+
                 BarBackgroundColor = Color.FromHex("#2ebced"),
                 BarTextColor = Color.White
             };
