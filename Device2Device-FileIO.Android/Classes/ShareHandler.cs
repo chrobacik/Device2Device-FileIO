@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Provider;
+using Android.Support.V4.Content;
 using Android.Webkit;
 using Device2DeviceFileIO.Classes;
 using Device2DeviceFileIO.Droid.Classes;
@@ -56,14 +57,16 @@ namespace Device2DeviceFileIO.Droid.Classes
                 {
                     if (metadataCursor?.MoveToFirst() == true)
                     {
-                        file.Name = metadataCursor.GetString(
-                            Array.IndexOf(projection, MediaStore.MediaColumns.DisplayName));
-                        file.Size = metadataCursor.GetLong(
-                            Array.IndexOf(projection, MediaStore.MediaColumns.Size));
+
+                        var colIndex = metadataCursor.GetColumnIndex(MediaStore.MediaColumns.DisplayName);
+                        if (colIndex > 0) file.Name = metadataCursor.GetString(colIndex);
+
+                        colIndex = metadataCursor.GetColumnIndex(MediaStore.MediaColumns.Size);
+                        if (colIndex > 0) file.Size = metadataCursor.GetLong(colIndex);
 
                         //getting type here does not work. Column was empty when tested with jpg from browser
-                        //File.Type = metadataCursor.GetString(
-                        //    Array.IndexOf(projection, MediaStore.MediaColumns.MimeType));
+                        //colIndex = metadataCursor.GetColumnIndex(MediaStore.MediaColumns.MimeType);
+                        //File.Type = metadataCursor.GetString(colIndex);
                         //using this
                         //cr.GetType(fileUri);
                         file.Type = GetMimeTypeFromUri(fileUri);
@@ -76,23 +79,27 @@ namespace Device2DeviceFileIO.Droid.Classes
 
                 //get file data
                 var firstClipDataItem = currentActivity.Intent.ClipData.GetItemAt(0);
-                var itemStream = cr.OpenInputStream(firstClipDataItem.Uri);
+                if (firstClipDataItem?.Uri != null)
+                {
 
-                var localStream = new System.IO.MemoryStream();
-                itemStream.CopyTo(localStream);
+                    var itemStream = cr.OpenInputStream(firstClipDataItem.Uri);
 
-                file.Content = localStream.ToArray() ?? new byte[] { };
+                    var localStream = new System.IO.MemoryStream();
+                    itemStream.CopyTo(localStream);
 
-                if (String.IsNullOrWhiteSpace(file.Name)) file.Name = fileUri.LastPathSegment;
-                if (file.Size <= 0) file.Size = file.Content.Length;
+                    file.Content = localStream.ToArray() ?? new byte[] { };
 
-                FileHandler.Save(file);
-                file.Status.Percentage = 1;
+                    if (String.IsNullOrWhiteSpace(file.Name)) file.Name = fileUri.LastPathSegment;
+                    if (file.Size <= 0) file.Size = file.Content.Length;
 
-                SharedFile = file;
+                    FileHandler.Save(file);
+                    file.Status.Percentage = 1;
 
-                //Notify Observers
-                OnShareFileRequestReceived();
+                    SharedFile = file;
+
+                    //Notify Observers
+                    OnShareFileRequestReceived();
+                }
             }
         }
 
@@ -123,30 +130,41 @@ namespace Device2DeviceFileIO.Droid.Classes
 
         public Task ProvideFile(TransferFile transferFile)
         {
+            var context = Android.App.Application.Context;
+            
             FileHandler.Save(transferFile);
             
             var sendFileIntent = new Intent(Intent.ActionSend);
 
             if (string.IsNullOrWhiteSpace(transferFile.Type))
                 transferFile.Type = GetMimeTypeFromExtension(transferFile.StoragePath);
-            sendFileIntent.SetType(transferFile.Type);
-
+ 
             var file = new Java.IO.File(transferFile.StoragePath);
-            var uri = Android.Net.Uri.FromFile(file);
+            var uri = FileProvider.GetUriForFile(context, context.PackageName, file);
 
+            sendFileIntent.SetType(transferFile.Type);
             sendFileIntent.PutExtra(Intent.ExtraStream, uri);
-            sendFileIntent.PutExtra(Intent.ExtraText, "Empfangene Datei");
+  
+            sendFileIntent.AddFlags(ActivityFlags.GrantReadUriPermission | ActivityFlags.GrantWriteUriPermission);
+            sendFileIntent.AddFlags(ActivityFlags.NewTask | ActivityFlags.NoHistory);
+            sendFileIntent.AddFlags(ActivityFlags.ClearWhenTaskReset);
+
+
             sendFileIntent.PutExtra(Intent.ExtraSubject, transferFile.Name);
+            sendFileIntent.PutExtra(Intent.ExtraText, "Datei Empfangen von File.IO");
 
             var chooserIntent = Intent.CreateChooser(sendFileIntent, "Teilen mit...");
             chooserIntent.SetFlags(ActivityFlags.ClearTop);
             chooserIntent.SetFlags(ActivityFlags.NewTask);
 
-            Android.App.Application.Context.StartActivity(chooserIntent);
+            var intent = chooserIntent;
+
+            context.StartActivity(intent);
 
             return Task.FromResult(true);
 
         }
+
 
         public TransferFile ReceiveFile()
         {

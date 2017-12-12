@@ -4,5 +4,15 @@
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.FLASHLIGHT" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<application android:label="Device2Device-FileIO" android:icon="@drawable/ic_launcher"></application>
+	<application android:label="Device2Device-FileIO" android:icon="@drawable/ic_launcher">
+    <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="ch.hsr.casmobile.Device2Device_FileIO"
+            android:exported="false"
+            android:grantUriPermissions="true">
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/filepaths" />
+    </provider>
+  </application>
 </manifest>

@@ -7,7 +7,8 @@ namespace Device2DeviceFileIO.Classes
 {
     public class FileHandler : IFileHandler
     {
-        readonly string RootPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+        readonly string RootPath = System.IO.Path.GetTempPath();
+        //System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
 
         public void Load(TransferFile file)
         {
