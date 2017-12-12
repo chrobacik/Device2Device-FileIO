@@ -18,6 +18,7 @@ namespace Device2DeviceFileIO
             Title = "Device2Device File.IO";
 
             ((App)Application.Current).ShareHandler.ShareFileRequestReceived += ShareHandler_ShareFileRequestReceived;
+            this.Disappearing += MainPage_Disappearing;
 
 
             btnGoToSelectFile.Clicked += async (object sender, System.EventArgs e) =>
@@ -62,6 +63,11 @@ namespace Device2DeviceFileIO
             App.GetCloudFileService().DownloadProgress += Handle_DownloadProgress;
             App.GetCloudFileService().UploadProgress += Handle_UploadProgress;
             App.GetCloudFileService().UploadFinished += Handle_UploadFinished;
+        }
+
+        private void MainPage_Disappearing(object sender, EventArgs e)
+        {
+            ((App)Application.Current).ShareHandler.ShareFileRequestReceived -= ShareHandler_ShareFileRequestReceived;
         }
 
         private void ShareHandler_ShareFileRequestReceived(object sender, EventArgs e)
